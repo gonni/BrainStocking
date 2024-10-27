@@ -1,0 +1,1212 @@
+2024.10.27 17:22:13 INFO  Started: Metals version 1.4.0 in folders '/Users/horus/dev/vsc-projects/brainstocking' for client Visual Studio Code 1.94.2.
+2024.10.27 17:22:13 WARN  Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
+10월 27, 2024 5:22:14 오후 org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+정보: Unsupported notification method: $/setTrace
+2024.10.27 17:22:15 INFO  running '/opt/homebrew/bin/sbt -Dbloop.export-jar-classifiers=sources bloopInstall'
+2024.10.27 17:22:15 WARN  no build target for: /Users/horus/dev/vsc-projects/brainstocking/project/metals.sbt
+2024.10.27 17:22:15 WARN  no build target for: /Users/horus/dev/vsc-projects/brainstocking/project/project/metals.sbt
+2024.10.27 17:22:15 INFO  no build target found for /Users/horus/dev/vsc-projects/brainstocking/project/project/metals.sbt. Using presentation compiler with project's scala-library version: 3.3.4
+2024.10.27 17:22:15 INFO  no build target found for /Users/horus/dev/vsc-projects/brainstocking/project/metals.sbt. Using presentation compiler with project's scala-library version: 3.3.4
+2024.10.27 17:22:17 INFO  [info] welcome to sbt 1.10.3 (Azul Systems, Inc. Java 11.0.16.1)
+2024.10.27 17:22:17 INFO  [info] loading global plugins from /Users/horus/.sbt/1.0/plugins
+2024.10.27 17:22:20 INFO  [info] loading settings for project brainstocking-build-build from metals.sbt ...
+2024.10.27 17:22:20 INFO  [info] loading project definition from /Users/horus/dev/vsc-projects/brainstocking/project/project
+2024.10.27 17:22:20 INFO  [info] loading settings for project brainstocking-build from metals.sbt ...
+2024.10.27 17:22:20 INFO  [info] loading project definition from /Users/horus/dev/vsc-projects/brainstocking/project
+2024.10.27 17:22:22 INFO  [success] Generated .bloop/brainstocking-build.json
+2024.10.27 17:22:22 INFO  [success] Total time: 1 s, completed 2024. 10. 27. 오후 5:22:22
+2024.10.27 17:22:23 INFO  [info] loading settings for project brainstocking from build.sbt ...
+2024.10.27 17:22:23 INFO  [info] set current project to hello-world (in build file:/Users/horus/dev/vsc-projects/brainstocking/)
+2024.10.27 17:22:23 INFO  [success] Generated .bloop/brainstocking-test.json
+2024.10.27 17:22:23 INFO  [success] Generated .bloop/brainstocking.json
+2024.10.27 17:22:23 INFO  [success] Total time: 0 s, completed 2024. 10. 27. 오후 5:22:23
+2024.10.27 17:22:23 INFO  time: ran 'sbt bloopInstall' in 7.9s
+2024.10.27 17:22:23 INFO  Attempting to connect to the build server...
+2024.10.27 17:22:23 INFO  Found a Bloop server running
+2024.10.27 17:22:23 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:22:23 INFO  Attempting to connect to the build server...
+2024.10.27 17:22:23 INFO  Found a Bloop server running
+2024.10.27 17:22:23 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:22:23 INFO  time: Connected to build server in 0.27s
+2024.10.27 17:22:23 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:22:23 INFO  running doctor check
+2024.10.27 17:22:23 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:22:25 WARN  Flyway upgrade recommended: H2 2.3.232 is newer than this version of Flyway and support has not been tested. The latest supported version of H2 is 2.2.224.
+2024.10.27 17:22:28 INFO  time: indexed workspace in 4.2s
+2024.10.27 17:23:36 INFO  running '/opt/homebrew/bin/sbt -Dbloop.export-jar-classifiers=sources bloopInstall'
+2024.10.27 17:23:37 INFO  [info] welcome to sbt 1.10.3 (Azul Systems, Inc. Java 11.0.16.1)
+2024.10.27 17:23:38 INFO  [info] loading global plugins from /Users/horus/.sbt/1.0/plugins
+2024.10.27 17:23:38 INFO  [info] loading settings for project brainstocking-build-build from metals.sbt ...
+2024.10.27 17:23:38 INFO  [info] loading project definition from /Users/horus/dev/vsc-projects/brainstocking/project/project
+2024.10.27 17:23:38 INFO  [info] loading settings for project brainstocking-build from metals.sbt ...
+2024.10.27 17:23:38 INFO  [info] loading project definition from /Users/horus/dev/vsc-projects/brainstocking/project
+2024.10.27 17:23:40 INFO  [success] Generated .bloop/brainstocking-build.json
+2024.10.27 17:23:40 INFO  [success] Total time: 1 s, completed 2024. 10. 27. 오후 5:23:40
+2024.10.27 17:23:41 INFO  [info] loading settings for project brainstocking from build.sbt ...
+2024.10.27 17:23:41 INFO  [info] set current project to hello-world (in build file:/Users/horus/dev/vsc-projects/brainstocking/)
+2024.10.27 17:23:41 INFO  [success] Generated .bloop/brainstocking.json
+2024.10.27 17:23:41 INFO  [success] Generated .bloop/brainstocking-test.json
+2024.10.27 17:23:41 INFO  [success] Total time: 0 s, completed 2024. 10. 27. 오후 5:23:42
+2024.10.27 17:23:42 INFO  time: ran 'sbt bloopInstall' in 6.28s
+2024.10.27 17:23:42 INFO  Disconnecting from Bloop session...
+2024.10.27 17:23:42 INFO  Shut down connection with build server.
+2024.10.27 17:23:42 INFO  Shut down connection with build server.
+2024.10.27 17:23:42 INFO  Attempting to connect to the build server...
+2024.10.27 17:23:42 INFO  Found a Bloop server running
+2024.10.27 17:23:42 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:23:42 INFO  Attempting to connect to the build server...
+2024.10.27 17:23:42 INFO  Found a Bloop server running
+2024.10.27 17:23:42 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:23:42 INFO  time: Connected to build server in 0.22s
+2024.10.27 17:23:42 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:23:42 INFO  running doctor check
+2024.10.27 17:23:42 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:23:44 INFO  time: indexed workspace in 1.4s
+2024.10.27 17:23:44 INFO  skipping build import with status 'Installed'
+2024.10.27 17:23:44 INFO  Disconnecting from Bloop session...
+2024.10.27 17:23:44 INFO  Shut down connection with build server.
+2024.10.27 17:23:44 INFO  Shut down connection with build server.
+2024.10.27 17:23:44 INFO  Attempting to connect to the build server...
+2024.10.27 17:23:44 INFO  Found a Bloop server running
+2024.10.27 17:23:44 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:23:44 INFO  Attempting to connect to the build server...
+2024.10.27 17:23:44 INFO  Found a Bloop server running
+2024.10.27 17:23:44 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:23:44 INFO  time: Connected to build server in 0.22s
+2024.10.27 17:23:44 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:23:44 INFO  running doctor check
+2024.10.27 17:23:44 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:23:45 INFO  time: indexed workspace in 1.23s
+10월 27, 2024 5:24:00 오후 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+경고: Unmatched cancel notification for request id 77
+2024.10.27 17:24:03 INFO  running '/opt/homebrew/bin/sbt -Dbloop.export-jar-classifiers=sources bloopInstall'
+2024.10.27 17:24:04 INFO  [info] welcome to sbt 1.10.3 (Azul Systems, Inc. Java 11.0.16.1)
+2024.10.27 17:24:05 INFO  [info] loading global plugins from /Users/horus/.sbt/1.0/plugins
+2024.10.27 17:24:05 INFO  [info] loading settings for project brainstocking-build-build from metals.sbt ...
+2024.10.27 17:24:05 INFO  [info] loading project definition from /Users/horus/dev/vsc-projects/brainstocking/project/project
+2024.10.27 17:24:05 INFO  [info] loading settings for project brainstocking-build from metals.sbt ...
+2024.10.27 17:24:05 INFO  [info] loading project definition from /Users/horus/dev/vsc-projects/brainstocking/project
+2024.10.27 17:24:07 INFO  [success] Generated .bloop/brainstocking-build.json
+2024.10.27 17:24:07 INFO  [success] Total time: 1 s, completed 2024. 10. 27. 오후 5:24:07
+2024.10.27 17:24:09 INFO  [info] loading settings for project brainstocking from build.sbt ...
+2024.10.27 17:24:09 INFO  [info] set current project to hello-world (in build file:/Users/horus/dev/vsc-projects/brainstocking/)
+2024.10.27 17:24:10 INFO  [success] Generated .bloop/brainstocking.json
+2024.10.27 17:24:10 INFO  [success] Generated .bloop/brainstocking-test.json
+2024.10.27 17:24:10 INFO  [success] Total time: 1 s, completed 2024. 10. 27. 오후 5:24:10
+2024.10.27 17:24:10 INFO  time: ran 'sbt bloopInstall' in 7.38s
+2024.10.27 17:24:10 INFO  Disconnecting from Bloop session...
+2024.10.27 17:24:10 INFO  Shut down connection with build server.
+2024.10.27 17:24:10 INFO  Shut down connection with build server.
+2024.10.27 17:24:10 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:10 INFO  Found a Bloop server running
+2024.10.27 17:24:10 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:10 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:10 INFO  Found a Bloop server running
+2024.10.27 17:24:10 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:10 INFO  time: Connected to build server in 0.22s
+2024.10.27 17:24:10 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:24:10 INFO  running doctor check
+2024.10.27 17:24:10 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:24:13 INFO  time: indexed workspace in 3.18s
+2024.10.27 17:24:13 INFO  skipping build import with status 'Installed'
+2024.10.27 17:24:13 INFO  Disconnecting from Bloop session...
+2024.10.27 17:24:13 INFO  Shut down connection with build server.
+2024.10.27 17:24:13 INFO  Shut down connection with build server.
+2024.10.27 17:24:13 INFO  Cancelling compilation on Bloop server
+2024.10.27 17:24:13 INFO  Scala main classes not supported by server
+2024.10.27 17:24:13 INFO  no build target found for /Users/horus/dev/vsc-projects/brainstocking/build.sbt. Using presentation compiler with project's scala-library version: 3.3.3
+2024.10.27 17:24:13 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:13 INFO  Found a Bloop server running
+2024.10.27 17:24:14 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:13 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:13 INFO  Found a Bloop server running
+2024.10.27 17:24:13 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:14 INFO  time: Connected to build server in 0.22s
+2024.10.27 17:24:14 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:24:14 INFO  running doctor check
+2024.10.27 17:24:14 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:24:14 WARN  Could not find semantic tokens for: file:///Users/horus/dev/vsc-projects/brainstocking/build.sbt
+2024.10.27 17:24:15 INFO  time: indexed workspace in 1.37s
+2024.10.27 17:24:21 INFO  skipping build import with status 'Installed'
+2024.10.27 17:24:21 INFO  Disconnecting from Bloop session...
+2024.10.27 17:24:21 INFO  Cancelling compilation on Bloop server
+2024.10.27 17:24:21 INFO  no build target found for /Users/horus/dev/vsc-projects/brainstocking/build.sbt. Using presentation compiler with project's scala-library version: 3.3.3
+2024.10.27 17:24:21 INFO  Shut down connection with build server.
+2024.10.27 17:24:21 INFO  Shut down connection with build server.
+2024.10.27 17:24:21 INFO  Scala main classes not supported by server
+2024.10.27 17:24:21 INFO  Scala test classes not supported by server
+2024.10.27 17:24:21 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:21 INFO  Found a Bloop server running
+2024.10.27 17:24:21 WARN  Could not find semantic tokens for: file:///Users/horus/dev/vsc-projects/brainstocking/build.sbt
+2024.10.27 17:24:21 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:21 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:21 INFO  Found a Bloop server running
+2024.10.27 17:24:21 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:21 INFO  time: Connected to build server in 0.22s
+2024.10.27 17:24:21 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:24:21 INFO  running doctor check
+2024.10.27 17:24:21 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:24:23 INFO  time: indexed workspace in 1.32s
+2024.10.27 17:24:25 INFO  skipping build import with status 'Installed'
+2024.10.27 17:24:25 INFO  Disconnecting from Bloop session...
+2024.10.27 17:24:25 INFO  Cancelling compilation on Bloop server
+2024.10.27 17:24:25 INFO  no build target found for /Users/horus/dev/vsc-projects/brainstocking/build.sbt. Using presentation compiler with project's scala-library version: 3.3.3
+2024.10.27 17:24:25 INFO  Shut down connection with build server.
+2024.10.27 17:24:25 INFO  Shut down connection with build server.
+2024.10.27 17:24:25 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:25 INFO  Found a Bloop server running
+2024.10.27 17:24:25 WARN  Could not find semantic tokens for: file:///Users/horus/dev/vsc-projects/brainstocking/build.sbt
+2024.10.27 17:24:25 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:25 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:25 INFO  Found a Bloop server running
+2024.10.27 17:24:25 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:26 INFO  time: Connected to build server in 0.21s
+2024.10.27 17:24:26 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:24:25 INFO  running doctor check
+2024.10.27 17:24:25 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:24:27 INFO  time: indexed workspace in 1.34s
+2024.10.27 17:24:27 INFO  skipping build import with status 'Installed'
+2024.10.27 17:24:27 INFO  Disconnecting from Bloop session...
+2024.10.27 17:24:27 INFO  Cancelling compilation on Bloop server
+2024.10.27 17:24:27 INFO  Shut down connection with build server.
+2024.10.27 17:24:27 INFO  Shut down connection with build server.
+2024.10.27 17:24:27 INFO  no build target found for /Users/horus/dev/vsc-projects/brainstocking/build.sbt. Using presentation compiler with project's scala-library version: 3.3.3
+2024.10.27 17:24:27 INFO  Scala main classes not supported by server
+2024.10.27 17:24:27 INFO  Scala test classes not supported by server
+2024.10.27 17:24:27 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:27 INFO  Found a Bloop server running
+2024.10.27 17:24:27 WARN  Could not find semantic tokens for: file:///Users/horus/dev/vsc-projects/brainstocking/build.sbt
+2024.10.27 17:24:28 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:27 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:27 INFO  Found a Bloop server running
+2024.10.27 17:24:27 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:27 INFO  time: Connected to build server in 0.22s
+2024.10.27 17:24:27 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:24:28 INFO  running doctor check
+2024.10.27 17:24:28 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:24:29 INFO  time: indexed workspace in 1.4s
+2024.10.27 17:24:29 INFO  skipping build import with status 'Installed'
+2024.10.27 17:24:29 INFO  Disconnecting from Bloop session...
+2024.10.27 17:24:29 INFO  Shut down connection with build server.
+2024.10.27 17:24:29 INFO  Shut down connection with build server.
+2024.10.27 17:24:29 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:29 INFO  Found a Bloop server running
+2024.10.27 17:24:29 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:29 INFO  Attempting to connect to the build server...
+2024.10.27 17:24:29 INFO  Found a Bloop server running
+2024.10.27 17:24:29 INFO  tracing is disabled for protocol BSP, to enable tracing of incoming and outgoing JSON messages create an empty file at /Users/horus/dev/vsc-projects/brainstocking/project/.metals/bsp.trace.json or /Users/horus/Library/Caches/org.scalameta.metals/bsp.trace.json
+2024.10.27 17:24:29 INFO  time: Connected to build server in 0.22s
+2024.10.27 17:24:29 INFO  Connected to Build server: Bloop v2.0.3
+2024.10.27 17:24:29 INFO  running doctor check
+2024.10.27 17:24:29 INFO  java targets: brainstocking-build, brainstocking, brainstocking-test
+2024.10.27 17:24:31 INFO  time: indexed workspace in 1.32s
+2024.10.27 17:24:35 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:24:35 INFO  time: compiled brainstocking in 0.14s
+10월 27, 2024 5:24:38 오후 org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+정보: Unsupported notification method: $/setTrace
+2024.10.27 17:25:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:25:54 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 17:26:31 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:26:31 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 17:27:12 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:27:12 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 17:28:11 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:28:11 INFO  time: compiled brainstocking in 84ms
+2024.10.27 17:29:45 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:29:45 INFO  time: compiled brainstocking in 70ms
+2024.10.27 17:29:52 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:29:52 INFO  time: compiled brainstocking in 97ms
+2024.10.27 17:29:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:29:54 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 17:30:00 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:00 INFO  time: compiled brainstocking in 92ms
+2024.10.27 17:30:24 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:24 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 17:30:28 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:28 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 17:30:33 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:33 INFO  time: compiled brainstocking in 54ms
+2024.10.27 17:30:39 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:39 INFO  time: compiled brainstocking in 54ms
+2024.10.27 17:30:41 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:41 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 17:30:44 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:44 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 17:30:46 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:46 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 17:30:47 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:47 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 17:30:49 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:49 INFO  time: compiled brainstocking in 62ms
+2024.10.27 17:30:52 INFO  time: compiled brainstocking in 3ms
+2024.10.27 17:30:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:30:54 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 17:33:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:33:16 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 17:37:02 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:37:02 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 17:38:48 INFO  compiling brainstocking (1 scala source)
+2024.10.27 17:38:48 INFO  time: compiled brainstocking in 0.18s
+10월 27, 2024 6:08:10 오후 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+경고: Unmatched cancel notification for request id 782
+2024.10.27 18:08:11 ERROR /Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HellStarted.scala
+scala.meta.internal.tokenizers.package$UnexpectedInputEndException
+	at scala.meta.internal.tokenizers.LegacyScanner.$anonfun$nextToken$1(LegacyScanner.scala:172)
+	at scala.Function0.apply$mcV$sp(Function0.scala:42)
+	at scala.meta.internal.tokenizers.LegacyScanner.scala$meta$internal$tokenizers$LegacyScanner$$nextToken(LegacyScanner.scala:178)
+	at scala.meta.internal.tokenizers.LegacyScanner.nextToken(LegacyScanner.scala:172)
+	at scala.meta.internal.mtags.ScalaToplevelMtags$XtensionScanner.mtagsNextToken(ScalaToplevelMtags.scala:73)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.emitMember(ScalaToplevelMtags.scala:754)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.loop(ScalaToplevelMtags.scala:248)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.indexRoot(ScalaToplevelMtags.scala:85)
+	at scala.meta.internal.metals.SemanticdbDefinition$.foreachWithReturnMtags(SemanticdbDefinition.scala:81)
+	at scala.meta.internal.metals.Indexer.indexSourceFile(Indexer.scala:485)
+	at scala.meta.internal.metals.Indexer.$anonfun$reindexWorkspaceSources$3(Indexer.scala:583)
+	at scala.meta.internal.metals.Indexer.$anonfun$reindexWorkspaceSources$3$adapted(Indexer.scala:580)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:619)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:617)
+	at scala.collection.AbstractIterator.foreach(Iterator.scala:1303)
+	at scala.meta.internal.metals.Indexer.reindexWorkspaceSources(Indexer.scala:580)
+	at scala.meta.internal.metals.MetalsLspService.$anonfun$onChange$2(MetalsLspService.scala:946)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.27 18:08:11 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:08:11 INFO  time: compiled brainstocking in 92ms
+2024.10.27 18:08:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:08:15 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 18:08:17 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:08:17 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 18:08:23 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:08:23 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 18:08:28 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:08:28 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 18:12:46 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:12:46 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 18:12:48 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:12:48 INFO  time: compiled brainstocking in 0.14s
+2024.10.27 18:12:52 ERROR /Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HellStarted.scala
+scala.meta.internal.tokenizers.package$UnexpectedInputEndException
+	at scala.meta.internal.tokenizers.LegacyScanner.$anonfun$nextToken$1(LegacyScanner.scala:172)
+	at scala.Function0.apply$mcV$sp(Function0.scala:42)
+	at scala.meta.internal.tokenizers.LegacyScanner.scala$meta$internal$tokenizers$LegacyScanner$$nextToken(LegacyScanner.scala:178)
+	at scala.meta.internal.tokenizers.LegacyScanner.nextToken(LegacyScanner.scala:172)
+	at scala.meta.internal.mtags.ScalaToplevelMtags$XtensionScanner.mtagsNextToken(ScalaToplevelMtags.scala:73)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.acceptTrivia(ScalaToplevelMtags.scala:999)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.parseMethodArgs(ScalaToplevelMtags.scala:683)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.parseMemberDefinitionLhs(ScalaToplevelMtags.scala:662)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.loop(ScalaToplevelMtags.scala:335)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.indexRoot(ScalaToplevelMtags.scala:85)
+	at scala.meta.internal.metals.SemanticdbDefinition$.foreachWithReturnMtags(SemanticdbDefinition.scala:81)
+	at scala.meta.internal.metals.Indexer.indexSourceFile(Indexer.scala:485)
+	at scala.meta.internal.metals.Indexer.$anonfun$reindexWorkspaceSources$3(Indexer.scala:583)
+	at scala.meta.internal.metals.Indexer.$anonfun$reindexWorkspaceSources$3$adapted(Indexer.scala:580)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:619)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:617)
+	at scala.collection.AbstractIterator.foreach(Iterator.scala:1303)
+	at scala.meta.internal.metals.Indexer.reindexWorkspaceSources(Indexer.scala:580)
+	at scala.meta.internal.metals.MetalsLspService.$anonfun$onChange$2(MetalsLspService.scala:946)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.27 18:12:52 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:12:52 INFO  time: compiled brainstocking in 80ms
+2024.10.27 18:12:56 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:12:56 INFO  time: compiled brainstocking in 75ms
+2024.10.27 18:13:01 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:13:01 INFO  time: compiled brainstocking in 76ms
+2024.10.27 18:13:06 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:13:06 INFO  time: compiled brainstocking in 82ms
+2024.10.27 18:13:11 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:13:11 INFO  time: compiled brainstocking in 75ms
+2024.10.27 18:13:19 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:13:19 INFO  time: compiled brainstocking in 83ms
+2024.10.27 18:13:23 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:13:23 INFO  time: compiled brainstocking in 71ms
+2024.10.27 18:13:31 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:13:31 INFO  time: compiled brainstocking in 70ms
+2024.10.27 18:13:42 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:13:42 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 18:14:12 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:14:12 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 18:15:42 ERROR /Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HellStarted.scala
+scala.meta.internal.tokenizers.package$UnexpectedInputEndException
+	at scala.meta.internal.tokenizers.LegacyScanner.$anonfun$nextToken$1(LegacyScanner.scala:172)
+	at scala.Function0.apply$mcV$sp(Function0.scala:42)
+	at scala.meta.internal.tokenizers.LegacyScanner.scala$meta$internal$tokenizers$LegacyScanner$$nextToken(LegacyScanner.scala:178)
+	at scala.meta.internal.tokenizers.LegacyScanner.nextToken(LegacyScanner.scala:172)
+	at scala.meta.internal.mtags.ScalaToplevelMtags$XtensionScanner.mtagsNextToken(ScalaToplevelMtags.scala:73)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.emitMember(ScalaToplevelMtags.scala:754)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.loop(ScalaToplevelMtags.scala:248)
+	at scala.meta.internal.mtags.ScalaToplevelMtags.indexRoot(ScalaToplevelMtags.scala:85)
+	at scala.meta.internal.metals.SemanticdbDefinition$.foreachWithReturnMtags(SemanticdbDefinition.scala:81)
+	at scala.meta.internal.metals.Indexer.indexSourceFile(Indexer.scala:485)
+	at scala.meta.internal.metals.Indexer.$anonfun$reindexWorkspaceSources$3(Indexer.scala:583)
+	at scala.meta.internal.metals.Indexer.$anonfun$reindexWorkspaceSources$3$adapted(Indexer.scala:580)
+	at scala.collection.IterableOnceOps.foreach(IterableOnce.scala:619)
+	at scala.collection.IterableOnceOps.foreach$(IterableOnce.scala:617)
+	at scala.collection.AbstractIterator.foreach(Iterator.scala:1303)
+	at scala.meta.internal.metals.Indexer.reindexWorkspaceSources(Indexer.scala:580)
+	at scala.meta.internal.metals.MetalsLspService.$anonfun$onChange$2(MetalsLspService.scala:946)
+	at scala.runtime.java8.JFunction0$mcV$sp.apply(JFunction0$mcV$sp.scala:18)
+	at scala.concurrent.Future$.$anonfun$apply$1(Future.scala:687)
+	at scala.concurrent.impl.Promise$Transformation.run(Promise.scala:467)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.27 18:15:42 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:15:42 INFO  time: compiled brainstocking in 81ms
+2024.10.27 18:15:48 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:15:48 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 18:15:55 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:15:55 INFO  time: compiled brainstocking in 77ms
+2024.10.27 18:15:55 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:15:56 INFO  time: compiled brainstocking in 95ms
+10월 27, 2024 6:16:02 오후 scala.meta.internal.pc.CompilerAccess handleError
+심각: A severe compiler error occurred, full details of the error can be found in the error report /Users/horus/dev/vsc-projects/brainstocking/.metals/.reports/metals-full/2024-10-27/r_compiler-error_(brainstocking)_18-16-02-445.md
+10월 27, 2024 6:16:15 오후 scala.meta.internal.pc.CompilerAccess handleError
+심각: A severe compiler error occurred, full details of the error can be found in the error report /Users/horus/dev/vsc-projects/brainstocking/.metals/.reports/metals-full/2024-10-27/r_compiler-error_(brainstocking)_18-16-15-181.md
+10월 27, 2024 6:16:15 오후 scala.meta.internal.pc.CompilerAccess handleError
+심각: A severe compiler error occurred, full details of the error can be found in the error report /Users/horus/dev/vsc-projects/brainstocking/.metals/.reports/metals-full/2024-10-27/r_compiler-error_(brainstocking)_18-16-15-302.md
+10월 27, 2024 6:16:15 오후 scala.meta.internal.pc.CompilerAccess handleError
+심각: A severe compiler error occurred, full details of the error can be found in the error report /Users/horus/dev/vsc-projects/brainstocking/.metals/.reports/metals-full/2024-10-27/r_compiler-error_(brainstocking)_18-16-15-426.md
+2024.10.27 18:16:21 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:16:21 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 18:16:25 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:16:25 INFO  time: compiled brainstocking in 83ms
+2024.10.27 18:16:28 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:16:28 INFO  time: compiled brainstocking in 84ms
+2024.10.27 18:16:30 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:16:30 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 18:16:41 ERROR scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$.<clinit>(DiscoveryFailures.scala:53)
+	at scala.meta.internal.metals.debug.DebugDiscovery.validate(DebugDiscovery.scala:92)
+	at scala.meta.internal.metals.debug.DebugDiscovery.debugDiscovery(DebugDiscovery.scala:170)
+	at scala.meta.internal.metals.debug.DebugDiscovery.runCommandDiscovery(DebugDiscovery.scala:61)
+	at scala.meta.internal.metals.MetalsLspService.discoverMainClasses(MetalsLspService.scala:1509)
+	at scala.meta.internal.metals.WorkspaceLspService.executeCommand(WorkspaceLspService.scala:818)
+	at scala.meta.metals.lsp.DelegatingScalaService.executeCommand(DelegatingScalaService.scala:169)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.27 18:16:49 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:16:49 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 18:16:56 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:16:56 INFO  time: compiled brainstocking in 82ms
+2024.10.27 18:16:57 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:16:57 INFO  time: compiled brainstocking in 80ms
+2024.10.27 18:16:59 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:16:59 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 18:17:02 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:17:02 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 18:17:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:17:03 INFO  time: compiled brainstocking in 0.14s
+2024.10.27 18:17:27 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:17:27 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 18:19:06 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:19:06 INFO  time: compiled brainstocking in 0.26s
+2024.10.27 18:19:07 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:19:07 INFO  time: compiled brainstocking in 0.26s
+2024.10.27 18:19:09 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:19:09 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 18:19:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:19:16 INFO  time: compiled brainstocking in 79ms
+2024.10.27 18:19:17 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:19:17 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:19:49 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:19:49 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:19:52 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:19:52 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:20:05 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:20:05 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:20:56 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:20:56 INFO  time: compiled brainstocking in 87ms
+2024.10.27 18:20:57 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:20:57 INFO  time: compiled brainstocking in 0.25s
+2024.10.27 18:21:02 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:21:02 INFO  time: compiled brainstocking in 83ms
+2024.10.27 18:21:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:21:03 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:21:04 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:21:04 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 18:21:07 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:21:07 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:21:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:21:26 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:23:17 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:23:17 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 18:23:29 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:23:29 INFO  time: compiled brainstocking in 0.25s
+2024.10.27 18:24:17 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:24:17 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 18:24:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:24:26 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 18:24:30 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:24:30 INFO  time: compiled brainstocking in 81ms
+2024.10.27 18:24:31 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:24:31 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 18:24:35 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:24:35 INFO  time: compiled brainstocking in 76ms
+2024.10.27 18:24:39 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:24:39 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:24:39 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:24:39 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 18:25:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:25:03 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:36:51 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:36:51 INFO  time: compiled brainstocking in 82ms
+2024.10.27 18:37:08 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:37:08 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 18:37:09 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:37:09 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 18:37:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:37:15 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 18:37:39 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:37:39 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 18:37:43 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:37:43 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 18:52:38 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:52:38 INFO  time: compiled brainstocking in 0.19s
+2024.10.27 18:52:44 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:52:44 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 18:52:46 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:52:46 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 18:52:50 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:52:50 INFO  time: compiled brainstocking in 67ms
+2024.10.27 18:53:00 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:53:00 INFO  time: compiled brainstocking in 88ms
+10월 27, 2024 6:53:02 오후 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+경고: Unmatched cancel notification for request id 3199
+2024.10.27 18:53:10 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:53:10 INFO  time: compiled brainstocking in 82ms
+2024.10.27 18:53:18 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:53:18 INFO  time: compiled brainstocking in 76ms
+2024.10.27 18:53:23 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:53:23 INFO  time: compiled brainstocking in 83ms
+2024.10.27 18:53:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:53:26 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 18:55:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:03 INFO  time: compiled brainstocking in 0.25s
+2024.10.27 18:55:04 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:04 INFO  time: compiled brainstocking in 75ms
+2024.10.27 18:55:08 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:08 INFO  time: compiled brainstocking in 82ms
+2024.10.27 18:55:10 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:10 INFO  time: compiled brainstocking in 64ms
+2024.10.27 18:55:10 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:11 INFO  time: compiled brainstocking in 65ms
+2024.10.27 18:55:13 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:13 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 18:55:14 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:14 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 18:55:22 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:22 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 18:55:25 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:55:25 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 18:56:53 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:56:53 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 18:57:24 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:57:24 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 18:57:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:57:26 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 18:57:29 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:57:29 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 18:57:34 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:57:34 INFO  time: compiled brainstocking in 0.43s
+2024.10.27 18:57:39 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:57:39 INFO  time: compiled brainstocking in 0.4s
+2024.10.27 18:57:45 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:57:45 INFO  time: compiled brainstocking in 94ms
+2024.10.27 18:57:46 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:57:46 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 18:57:50 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:57:50 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 18:59:13 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:13 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 18:59:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:16 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 18:59:20 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:20 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 18:59:21 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:21 INFO  time: compiled brainstocking in 99ms
+2024.10.27 18:59:23 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:23 INFO  time: compiled brainstocking in 0.3s
+2024.10.27 18:59:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:26 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 18:59:27 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:27 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 18:59:43 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:43 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 18:59:45 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:45 INFO  time: compiled brainstocking in 71ms
+2024.10.27 18:59:46 INFO  compiling brainstocking (1 scala source)
+2024.10.27 18:59:46 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 19:03:13 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:03:13 INFO  time: compiled brainstocking in 0.25s
+2024.10.27 19:03:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:03:16 INFO  time: compiled brainstocking in 0.26s
+2024.10.27 19:03:19 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:03:19 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 19:03:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:03:26 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 19:12:58 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:12:58 INFO  time: compiled brainstocking in 0.27s
+2024.10.27 19:13:00 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:13:00 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 19:13:18 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:13:18 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 19:23:11 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:23:11 INFO  time: compiled brainstocking in 0.26s
+2024.10.27 19:23:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:23:15 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 19:23:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:23:16 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 19:23:19 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:23:19 INFO  time: compiled brainstocking in 0.32s
+2024.10.27 19:26:51 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:26:51 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 19:26:55 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:26:55 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 19:26:56 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:26:56 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 19:42:52 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:42:52 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 19:42:58 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:42:58 INFO  time: compiled brainstocking in 43ms
+2024.10.27 19:43:14 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:14 INFO  time: compiled brainstocking in 74ms
+2024.10.27 19:43:17 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:17 INFO  time: compiled brainstocking in 69ms
+2024.10.27 19:43:19 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:19 INFO  time: compiled brainstocking in 47ms
+2024.10.27 19:43:23 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:23 INFO  time: compiled brainstocking in 74ms
+2024.10.27 19:43:27 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:27 INFO  time: compiled brainstocking in 36ms
+2024.10.27 19:43:30 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:30 INFO  time: compiled brainstocking in 46ms
+2024.10.27 19:43:31 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:31 INFO  time: compiled brainstocking in 35ms
+2024.10.27 19:43:34 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:34 INFO  time: compiled brainstocking in 37ms
+2024.10.27 19:43:36 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:36 INFO  time: compiled brainstocking in 43ms
+2024.10.27 19:43:38 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:38 INFO  time: compiled brainstocking in 43ms
+2024.10.27 19:43:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:43:54 INFO  time: compiled brainstocking in 49ms
+2024.10.27 19:44:02 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:44:02 INFO  time: compiled brainstocking in 43ms
+2024.10.27 19:51:24 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:51:24 INFO  time: compiled brainstocking in 44ms
+2024.10.27 19:55:21 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:55:21 INFO  time: compiled brainstocking in 52ms
+2024.10.27 19:55:24 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:55:24 INFO  time: compiled brainstocking in 52ms
+2024.10.27 19:55:29 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:55:29 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 19:55:33 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:55:33 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 19:55:37 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:55:37 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 19:55:41 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:55:41 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 19:55:44 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:55:44 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 19:55:48 INFO  compiling brainstocking (1 scala source)
+2024.10.27 19:55:48 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 20:06:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:06:26 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 20:06:40 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:06:40 INFO  time: compiled brainstocking in 75ms
+2024.10.27 20:15:47 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:15:47 INFO  time: compiled brainstocking in 61ms
+2024.10.27 20:15:51 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:15:51 INFO  time: compiled brainstocking in 80ms
+2024.10.27 20:16:21 WARN  Attempt to organize your imports failed. It looks like you have compilation issues causing your semanticdb to be stale. Ensure everything is compiling and try again.
+2024.10.27 20:16:23 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:16:23 INFO  time: compiled brainstocking in 38ms
+2024.10.27 20:16:28 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:16:28 INFO  time: compiled brainstocking in 89ms
+2024.10.27 20:18:57 ERROR scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$.<clinit>(DiscoveryFailures.scala:53)
+	at scala.meta.internal.metals.debug.DebugDiscovery.validate(DebugDiscovery.scala:92)
+	at scala.meta.internal.metals.debug.DebugDiscovery.debugDiscovery(DebugDiscovery.scala:170)
+	at scala.meta.internal.metals.debug.DebugDiscovery.runCommandDiscovery(DebugDiscovery.scala:61)
+	at scala.meta.internal.metals.MetalsLspService.discoverMainClasses(MetalsLspService.scala:1509)
+	at scala.meta.internal.metals.WorkspaceLspService.executeCommand(WorkspaceLspService.scala:818)
+	at scala.meta.metals.lsp.DelegatingScalaService.executeCommand(DelegatingScalaService.scala:169)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.27 20:18:58 ERROR scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$.<clinit>(DiscoveryFailures.scala:53)
+	at scala.meta.internal.metals.debug.DebugDiscovery.validate(DebugDiscovery.scala:92)
+	at scala.meta.internal.metals.debug.DebugDiscovery.debugDiscovery(DebugDiscovery.scala:170)
+	at scala.meta.internal.metals.debug.DebugDiscovery.runCommandDiscovery(DebugDiscovery.scala:61)
+	at scala.meta.internal.metals.MetalsLspService.discoverMainClasses(MetalsLspService.scala:1509)
+	at scala.meta.internal.metals.WorkspaceLspService.executeCommand(WorkspaceLspService.scala:818)
+	at scala.meta.metals.lsp.DelegatingScalaService.executeCommand(DelegatingScalaService.scala:169)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.27 20:19:04 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:19:04 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 20:19:08 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:19:08 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 20:19:09 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:19:09 INFO  time: compiled brainstocking in 0.19s
+2024.10.27 20:19:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:19:26 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 20:29:49 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:29:49 INFO  time: compiled brainstocking in 98ms
+2024.10.27 20:29:57 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:29:57 INFO  time: compiled brainstocking in 96ms
+2024.10.27 20:35:30 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:35:30 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 20:35:32 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:35:32 INFO  time: compiled brainstocking in 79ms
+2024.10.27 20:35:41 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:35:41 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 20:35:43 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:35:43 INFO  time: compiled brainstocking in 70ms
+2024.10.27 20:35:48 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:35:48 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 20:35:50 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:35:50 INFO  time: compiled brainstocking in 77ms
+2024.10.27 20:35:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:35:54 INFO  time: compiled brainstocking in 99ms
+2024.10.27 20:35:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:35:54 INFO  time: compiled brainstocking in 75ms
+2024.10.27 20:36:08 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:36:08 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 20:36:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:36:16 INFO  time: compiled brainstocking in 0.14s
+2024.10.27 20:36:34 ERROR scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$.<clinit>(DiscoveryFailures.scala:53)
+	at scala.meta.internal.metals.debug.DebugDiscovery.validate(DebugDiscovery.scala:92)
+	at scala.meta.internal.metals.debug.DebugDiscovery.debugDiscovery(DebugDiscovery.scala:170)
+	at scala.meta.internal.metals.debug.DebugDiscovery.runCommandDiscovery(DebugDiscovery.scala:61)
+	at scala.meta.internal.metals.MetalsLspService.discoverMainClasses(MetalsLspService.scala:1509)
+	at scala.meta.internal.metals.WorkspaceLspService.executeCommand(WorkspaceLspService.scala:818)
+	at scala.meta.metals.lsp.DelegatingScalaService.executeCommand(DelegatingScalaService.scala:169)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.27 20:36:39 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:36:39 INFO  time: compiled brainstocking in 98ms
+2024.10.27 20:36:43 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:36:43 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 20:38:09 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:38:09 INFO  time: compiled brainstocking in 0.3s
+2024.10.27 20:38:16 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:38:16 INFO  time: compiled brainstocking in 99ms
+2024.10.27 20:38:19 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:38:19 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 20:38:20 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:38:20 INFO  time: compiled brainstocking in 92ms
+2024.10.27 20:38:41 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:38:41 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 20:43:02 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:43:02 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 20:43:07 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:43:07 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 20:43:07 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:43:07 INFO  time: compiled brainstocking in 77ms
+2024.10.27 20:43:14 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:43:14 INFO  time: compiled brainstocking in 95ms
+2024.10.27 20:43:20 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:43:20 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 20:43:20 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:43:20 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 20:43:46 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:43:46 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 20:44:05 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:44:05 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 20:44:09 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:44:09 INFO  time: compiled brainstocking in 0.14s
+2024.10.27 20:44:11 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 20:44:11 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 20:44:44 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:44:44 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 20:44:45 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:44:45 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 20:44:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:44:54 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 20:44:56 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:44:56 INFO  time: compiled brainstocking in 0.14s
+2024.10.27 20:44:57 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:44:57 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 20:47:20 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:47:20 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 20:47:25 WARN  Could not find 'HttpServerConfig' using presentation compiler nor semanticdb. Trying to guess the definition using available information from local class context. 
+2024.10.27 20:47:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:47:26 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 20:47:29 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:47:29 INFO  time: compiled brainstocking in 0.16s
+2024.10.27 20:53:59 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:53:59 INFO  time: compiled brainstocking in 0.26s
+2024.10.27 20:54:04 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:54:04 INFO  time: compiled brainstocking in 0.26s
+2024.10.27 20:54:10 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:54:10 INFO  time: compiled brainstocking in 0.32s
+2024.10.27 20:54:34 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:54:34 INFO  time: compiled brainstocking in 94ms
+2024.10.27 20:54:43 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:54:43 INFO  time: compiled brainstocking in 83ms
+2024.10.27 20:55:07 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:55:07 INFO  time: compiled brainstocking in 88ms
+2024.10.27 20:55:09 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:55:09 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 20:55:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:55:16 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 20:55:58 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:55:58 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 20:56:02 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:56:02 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 20:56:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:56:15 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 20:56:58 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:56:58 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 20:57:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:57:03 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 20:57:07 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:57:07 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 20:57:12 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:57:12 INFO  time: compiled brainstocking in 0.17s
+2024.10.27 20:57:55 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:57:55 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 20:57:58 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:57:58 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 20:58:00 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:58:00 INFO  time: compiled brainstocking in 0.51s
+2024.10.27 20:58:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:58:03 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 20:58:04 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:58:04 INFO  time: compiled brainstocking in 96ms
+2024.10.27 20:58:09 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:58:09 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 20:58:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:58:15 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 20:58:17 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:58:17 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 20:58:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:58:54 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 20:59:05 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:59:05 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 20:59:09 INFO  compiling brainstocking (1 scala source)
+2024.10.27 20:59:09 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 21:03:01 INFO  compiling brainstocking (1 scala source)
+2024.10.27 21:03:01 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 21:03:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 21:03:03 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 21:03:49 INFO  compiling brainstocking (1 scala source)
+2024.10.27 21:03:49 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 21:03:50 INFO  compiling brainstocking (1 scala source)
+2024.10.27 21:03:50 INFO  time: compiled brainstocking in 0.19s
+2024.10.27 21:03:58 INFO  compiling brainstocking (1 scala source)
+2024.10.27 21:03:58 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 21:13:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 21:13:15 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 21:13:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 21:13:16 INFO  time: compiled brainstocking in 0.18s
+10월 27, 2024 9:13:20 오후 org.eclipse.lsp4j.jsonrpc.RemoteEndpoint handleCancellation
+경고: Unmatched cancel notification for request id 8369
+2024.10.27 21:13:20 INFO  compiling brainstocking (1 scala source)
+2024.10.27 21:13:20 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 23:21:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:21:15 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 23:21:53 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:21:53 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 23:22:05 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:22:05 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 23:22:21 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:22:21 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 23:22:24 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:22:24 INFO  time: compiled brainstocking in 0.19s
+2024.10.27 23:22:24 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:22:24 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 23:25:09 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:25:09 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 23:25:11 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:25:11 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 23:25:23 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:25:23 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 23:25:32 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:25:32 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 23:25:36 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:25:36 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 23:25:41 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:25:41 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 23:25:51 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:25:51 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 23:26:02 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:26:02 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 23:26:04 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:26:04 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 23:29:30 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:29:30 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 23:29:30 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:29:30 INFO  time: compiled brainstocking in 0.19s
+2024.10.27 23:29:43 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:29:43 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 23:38:25 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:25 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 23:38:26 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:26 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 23:38:30 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:30 INFO  time: compiled brainstocking in 86ms
+2024.10.27 23:38:36 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:36 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 23:38:41 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:41 INFO  time: compiled brainstocking in 83ms
+2024.10.27 23:38:48 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:48 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 23:38:52 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:52 INFO  time: compiled brainstocking in 0.42s
+2024.10.27 23:38:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:54 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 23:38:56 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:38:56 INFO  time: compiled brainstocking in 74ms
+2024.10.27 23:39:00 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:00 INFO  time: compiled brainstocking in 0.5s
+2024.10.27 23:39:02 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:02 INFO  time: compiled brainstocking in 90ms
+2024.10.27 23:39:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:03 INFO  time: compiled brainstocking in 0.45s
+2024.10.27 23:39:14 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:14 INFO  time: compiled brainstocking in 0.51s
+2024.10.27 23:39:16 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:16 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 23:39:37 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:37 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 23:39:42 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:42 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 23:39:44 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:44 INFO  time: compiled brainstocking in 0.18s
+***** missing reference, looking for GeneratedMessageCompanion/T in package scalapb
+decls = Scope{}
+***** missing reference, looking for GeneratedMessage/T in package scalapb
+decls = Scope{}
+***** missing reference, looking for Updatable/T in package scalapb.lenses
+decls = Scope{}
+***** missing reference, looking for GeneratedEnumCompanion/T in package scalapb
+decls = Scope{
+  final lazy module object lenses: scalapb.lenses
+  final module object lenses extends  {this: scalapb.lenses.type =>} at
+    (scalapb : scalapb.type)
+}
+***** missing reference, looking for GeneratedEnum/T in package scalapb
+decls = Scope{
+  final lazy module object lenses: scalapb.lenses
+  final module object lenses extends  {this: scalapb.lenses.type =>} at
+    (scalapb : scalapb.type)
+}
+2024.10.27 23:39:53 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:53 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 23:39:56 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:56 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 23:39:59 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:39:59 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 23:40:05 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:40:05 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 23:40:13 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:40:13 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 23:40:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:40:15 INFO  time: compiled brainstocking in 0.18s
+2024.10.27 23:40:25 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:40:25 INFO  time: compiled brainstocking in 0.31s
+2024.10.27 23:40:28 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:40:28 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 23:40:29 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:40:29 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 23:40:36 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:40:36 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 23:40:40 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:40:40 INFO  time: compiled brainstocking in 0.23s
+2024.10.27 23:41:34 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:41:34 INFO  time: compiled brainstocking in 0.27s
+2024.10.27 23:47:10 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:47:10 INFO  time: compiled brainstocking in 0.24s
+2024.10.27 23:47:52 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:47:52 INFO  time: compiled brainstocking in 36ms
+2024.10.27 23:47:52 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:47:52 INFO  time: compiled brainstocking in 0.1s
+2024.10.27 23:47:59 INFO  compiling brainstocking (2 scala sources)
+2024.10.27 23:47:59 INFO  time: compiled brainstocking in 0.29s
+2024.10.27 23:48:03 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:48:03 INFO  time: compiled brainstocking in 0.27s
+2024.10.27 23:48:12 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:48:12 INFO  time: compiled brainstocking in 0.26s
+2024.10.27 23:48:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:48:15 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 23:48:19 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:48:19 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 23:48:23 ERROR scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$.<clinit>(DiscoveryFailures.scala:53)
+	at scala.meta.internal.metals.debug.DebugDiscovery.validate(DebugDiscovery.scala:92)
+	at scala.meta.internal.metals.debug.DebugDiscovery.debugDiscovery(DebugDiscovery.scala:170)
+	at scala.meta.internal.metals.debug.DebugDiscovery.runCommandDiscovery(DebugDiscovery.scala:61)
+	at scala.meta.internal.metals.MetalsLspService.discoverMainClasses(MetalsLspService.scala:1509)
+	at scala.meta.internal.metals.WorkspaceLspService.executeCommand(WorkspaceLspService.scala:818)
+	at scala.meta.metals.lsp.DelegatingScalaService.executeCommand(DelegatingScalaService.scala:169)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.27 23:50:18 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:50:18 INFO  time: compiled brainstocking in 0.13s
+2024.10.27 23:50:21 WARN  Could not find 'HttpServerConfig' using presentation compiler nor semanticdb. Trying to guess the definition using available information from local class context. 
+2024.10.27 23:50:25 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:50:25 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 23:50:37 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:50:37 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 23:50:55 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:50:55 INFO  time: compiled brainstocking in 0.12s
+2024.10.27 23:51:27 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:51:27 INFO  time: compiled brainstocking in 0.11s
+2024.10.27 23:51:55 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:51:55 INFO  time: compiled brainstocking in 0.22s
+2024.10.27 23:51:56 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:51:56 INFO  time: compiled brainstocking in 0.36s
+2024.10.27 23:52:14 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:52:14 INFO  time: compiled brainstocking in 0.66s
+2024.10.27 23:52:21 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:52:21 INFO  time: compiled brainstocking in 0.5s
+2024.10.27 23:52:31 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:52:31 INFO  time: compiled brainstocking in 0.47s
+2024.10.27 23:52:34 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:52:34 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 23:52:41 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:52:41 INFO  time: compiled brainstocking in 0.19s
+2024.10.27 23:52:54 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:52:54 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 23:55:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:55:15 INFO  time: compiled brainstocking in 0.19s
+2024.10.27 23:55:15 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:55:15 INFO  time: compiled brainstocking in 0.15s
+2024.10.27 23:58:48 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:58:48 INFO  time: compiled brainstocking in 0.21s
+2024.10.27 23:58:51 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:58:51 INFO  time: compiled brainstocking in 0.2s
+2024.10.27 23:59:21 INFO  compiling brainstocking (1 scala source)
+2024.10.27 23:59:21 INFO  time: compiled brainstocking in 0.19s
+2024.10.28 00:00:00 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:00:00 INFO  time: compiled brainstocking in 0.2s
+2024.10.28 00:00:03 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:00:03 INFO  time: compiled brainstocking in 0.19s
+2024.10.28 00:00:05 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:00:05 INFO  time: compiled brainstocking in 0.31s
+2024.10.28 00:00:16 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:00:16 INFO  time: compiled brainstocking in 0.2s
+2024.10.28 00:00:37 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:00:37 INFO  time: compiled brainstocking in 0.22s
+2024.10.28 00:02:55 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:02:55 INFO  time: compiled brainstocking in 0.2s
+2024.10.28 00:03:23 ERROR scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$.<clinit>(DiscoveryFailures.scala:53)
+	at scala.meta.internal.metals.debug.DebugDiscovery.validate(DebugDiscovery.scala:92)
+	at scala.meta.internal.metals.debug.DebugDiscovery.debugDiscovery(DebugDiscovery.scala:170)
+	at scala.meta.internal.metals.debug.DebugDiscovery.runCommandDiscovery(DebugDiscovery.scala:61)
+	at scala.meta.internal.metals.MetalsLspService.discoverMainClasses(MetalsLspService.scala:1509)
+	at scala.meta.internal.metals.WorkspaceLspService.executeCommand(WorkspaceLspService.scala:818)
+	at scala.meta.metals.lsp.DelegatingScalaService.executeCommand(DelegatingScalaService.scala:169)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.28 00:03:24 ERROR scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$.<clinit>(DiscoveryFailures.scala:53)
+	at scala.meta.internal.metals.debug.DebugDiscovery.validate(DebugDiscovery.scala:92)
+	at scala.meta.internal.metals.debug.DebugDiscovery.debugDiscovery(DebugDiscovery.scala:170)
+	at scala.meta.internal.metals.debug.DebugDiscovery.runCommandDiscovery(DebugDiscovery.scala:61)
+	at scala.meta.internal.metals.MetalsLspService.discoverMainClasses(MetalsLspService.scala:1509)
+	at scala.meta.internal.metals.WorkspaceLspService.executeCommand(WorkspaceLspService.scala:818)
+	at scala.meta.metals.lsp.DelegatingScalaService.executeCommand(DelegatingScalaService.scala:169)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.28 00:03:26 ERROR scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$: Cannot run class, since the workspace has errors.
+	at scala.meta.internal.metals.debug.DiscoveryFailures$WorkspaceErrorsException$.<clinit>(DiscoveryFailures.scala:53)
+	at scala.meta.internal.metals.debug.DebugDiscovery.validate(DebugDiscovery.scala:92)
+	at scala.meta.internal.metals.debug.DebugDiscovery.debugDiscovery(DebugDiscovery.scala:170)
+	at scala.meta.internal.metals.debug.DebugDiscovery.runCommandDiscovery(DebugDiscovery.scala:61)
+	at scala.meta.internal.metals.MetalsLspService.discoverMainClasses(MetalsLspService.scala:1509)
+	at scala.meta.internal.metals.WorkspaceLspService.executeCommand(WorkspaceLspService.scala:818)
+	at scala.meta.metals.lsp.DelegatingScalaService.executeCommand(DelegatingScalaService.scala:169)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.lambda$recursiveFindRpcMethods$0(GenericEndpoint.java:65)
+	at org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint.request(GenericEndpoint.java:128)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.handleRequest(RemoteEndpoint.java:271)
+	at org.eclipse.lsp4j.jsonrpc.RemoteEndpoint.consume(RemoteEndpoint.java:201)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.handleMessage(StreamMessageProducer.java:185)
+	at org.eclipse.lsp4j.jsonrpc.json.StreamMessageProducer.listen(StreamMessageProducer.java:97)
+	at org.eclipse.lsp4j.jsonrpc.json.ConcurrentMessageProcessor.run(ConcurrentMessageProcessor.java:114)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(Thread.java:833)
+
+2024.10.28 00:07:44 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:07:44 INFO  time: compiled brainstocking in 0.28s
+2024.10.28 00:07:45 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:07:45 INFO  time: compiled brainstocking in 0.21s
+2024.10.28 00:08:00 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:00 INFO  time: compiled brainstocking in 0.24s
+2024.10.28 00:08:02 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:02 INFO  time: compiled brainstocking in 0.21s
+2024.10.28 00:08:30 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:30 INFO  time: compiled brainstocking in 0.12s
+2024.10.28 00:08:32 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:32 INFO  time: compiled brainstocking in 0.21s
+2024.10.28 00:08:42 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:42 INFO  time: compiled brainstocking in 0.14s
+2024.10.28 00:08:44 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:44 INFO  time: compiled brainstocking in 0.15s
+2024.10.28 00:08:47 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:47 INFO  time: compiled brainstocking in 0.23s
+2024.10.28 00:08:49 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:49 INFO  time: compiled brainstocking in 0.19s
+2024.10.28 00:08:55 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:08:55 INFO  time: compiled brainstocking in 0.35s
+2024.10.28 00:11:12 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:11:12 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:11:12 INFO  time: compiled brainstocking in 0.3s
+2024.10.28 00:17:53 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:17:53 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:17:53 INFO  time: compiled brainstocking in 0.31s
+2024.10.28 00:19:14 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:19:14 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:19:14 INFO  time: compiled brainstocking in 0.13s
+2024.10.28 00:19:15 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:19:15 INFO  time: compiled brainstocking in 0.3s
+2024.10.28 00:19:26 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:19:26 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:19:26 INFO  time: compiled brainstocking in 0.3s
+2024.10.28 00:19:42 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:19:42 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:19:42 INFO  time: compiled brainstocking in 0.1s
+2024.10.28 00:19:55 INFO  time: compiled brainstocking in 3ms
+2024.10.28 00:20:01 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:20:01 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:20:01 INFO  time: compiled brainstocking in 0.27s
+2024.10.28 00:20:03 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:20:03 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:20:03 INFO  time: compiled brainstocking in 0.26s
+2024.10.28 00:43:45 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:43:45 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:43:45 INFO  time: compiled brainstocking in 0.3s
+2024.10.28 00:44:16 INFO  compiling brainstocking (1 scala source)
+2024.10.28 00:44:16 WARN  Invalid text document uri received from build server: file:///Users/horus/dev/vsc-projects/brainstocking/src/main/scala/x/yg/sample/HttpServerConfig.scala
+2024.10.28 00:44:16 INFO  time: compiled brainstocking in 0.29s
+10월 28, 2024 12:46:47 오전 org.eclipse.lsp4j.jsonrpc.services.GenericEndpoint notify
+정보: Unsupported notification method: $/setTrace
