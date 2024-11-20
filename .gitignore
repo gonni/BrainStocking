@@ -2,5 +2,5 @@
 /project/target/
 /target/
 /.bsp/
-/.bloop/brain*/
+/.bloop/
 /.metals/
