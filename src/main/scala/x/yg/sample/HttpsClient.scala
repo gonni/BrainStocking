@@ -9,6 +9,7 @@ import zio.http.Header.UserAgent
 
 object HttpsClient extends ZIOAppDefault {
   val url     = URL.decode("https://finance.naver.com/item/sise_time.naver?code=205470&thistime=20241119161049&page=1").toOption.get
+  // val url = URL.decode("https://m.naver.com").toOption.get
   val headers = Headers(Header.UserAgent(UserAgent.ProductOrComment.Product("Mozilla", Some("5.0"))))
 
   val sslConfig = ClientSSLConfig.FromTrustStoreResource(
