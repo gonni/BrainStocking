@@ -19,6 +19,7 @@ libraryDependencies ++= Seq(
   "org.slf4j"      % "slf4j-simple"      % "2.0.9"
 )
 
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.11"
 libraryDependencies += "net.ruippeixotog" %% "scala-scraper" % "3.1.1"
 libraryDependencies += "dev.zio" %% "zio-macros" % "2.1.6"
 libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "2.3.0"
