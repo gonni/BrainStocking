@@ -1,4 +1,3 @@
-
 scalaVersion := "3.3.3"
 
 name := "hello-world"
@@ -23,3 +22,5 @@ libraryDependencies ++= Seq(
 libraryDependencies += "net.ruippeixotog" %% "scala-scraper" % "3.1.1"
 libraryDependencies += "dev.zio" %% "zio-macros" % "2.1.6"
 libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "2.3.0"
+// https://mvnrepository.com/artifact/com.influxdb/influxdb-client-scala
+libraryDependencies += "com.influxdb" % "influxdb-client-scala_2.13" % "7.2.0"

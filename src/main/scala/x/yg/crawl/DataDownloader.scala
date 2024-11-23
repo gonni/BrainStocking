@@ -6,6 +6,7 @@ import zio.http.netty.NettyConfig
 import zio.http.netty.client.NettyClientDriver
 import zio.http.Header.UserAgent
 import org.scalameta.data.data
+import java.nio.charset.Charset
 
 trait DataDownloader {
 	def download(url: String): ZIO[Client, Throwable, String]
@@ -17,7 +18,7 @@ final class DataDownloaderLive extends DataDownloader {
 		for {
 			_ <- ZIO.log("downloading data")
 			data <- ZClient.batched(Request.get(url).addHeaders(headers))
-			res <- data.body.asString
+			res <- data.body.asString(Charset.forName("EUC-KR"))
 		} yield res
 }
 
