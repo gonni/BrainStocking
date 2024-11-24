@@ -9,7 +9,9 @@ case class ServiceController private(stockRepo: StockRepo) {
   def routes: Routes[Any, Response] = Routes(
     Method.GET / "stock" / "daily" / "all" -> handler {
       Response.text("Hello World")
-    }
+    },
+
+    
   )
 }
 

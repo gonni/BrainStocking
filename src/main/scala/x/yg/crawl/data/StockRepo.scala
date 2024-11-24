@@ -18,6 +18,7 @@ object StockMinVolumeTable:
 
 trait StockRepo {
   def insertStockMinVolume(stockMinVolume: StockMinVolumeTable): ZIO[Any, Throwable, Long]
+  def insertStockMinVolumeBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]]
   def selectStockMinVolume(tsCode: String): Task[List[StockMinVolumeTable]]  
 }
 
@@ -26,12 +27,17 @@ class StockRepoImpl(quill: Quill.Mysql[SnakeCase]) extends StockRepo {
   import quill._
   private inline def qryStockMinVolumeTable = quote(querySchema[StockMinVolumeTable](entity = "STOCK_MIN_VOLUME"))
 
-  def insertStockMinVolume(stockMinVolume: StockMinVolumeTable): ZIO[Any, Throwable, Long] =
+  override def insertStockMinVolume(stockMinVolume: StockMinVolumeTable): ZIO[Any, Throwable, Long] =
     run(
       qryStockMinVolumeTable.insertValue(lift(stockMinVolume))
     )
 
-  def selectStockMinVolume(tsCode: String): Task[List[StockMinVolumeTable]] =
+  override def insertStockMinVolumeBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]] =
+    run(
+      liftQuery(stockMinVolume).foreach(e => qryStockMinVolumeTable.insertValue(e))
+    )
+
+  override def selectStockMinVolume(tsCode: String): Task[List[StockMinVolumeTable]] =
     run(
       qryStockMinVolumeTable.filter(_.tsCode == lift(tsCode))
     )
