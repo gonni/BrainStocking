@@ -19,15 +19,15 @@ class MinStockCrawlerImpl extends MinStockCrawler {
   override def crawl(stockCode: String, targetDt: String): ZIO[Client & DataDownloader, Throwable, List[StockMinVolumeTable]] = for {
     downloader <- ZIO.service[DataDownloader]
     data <- downloader.download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=20241119161049&page=1")
-    res <- extractFilteredData(data)
+    res <- ZIO.attempt(extractFilteredData(data))
   } yield res
 
-  private def extractFilteredData(data: String): ZIO[Any, Throwable, List[StockMinVolumeTable]] = {
+  private def extractFilteredData(data: String): List[StockMinVolumeTable] = {
     val browser = new JsoupBrowser()
     val dom = browser.parseString(data)
 
     val f = dom >> "table" >> elementList("tr")
-    val res =  for {
+    for {
       res <- f.flatMap{x=>
         val tds = x >> elementList("td")
         tds.length match {
@@ -45,12 +45,8 @@ class MinStockCrawlerImpl extends MinStockCrawler {
         }
       }
     } yield res
-
-    ZIO.attempt(res)
   }
 }
-
-
 
 object MinStockCrawler {
   val live: ZLayer[DataDownloader, Nothing, MinStockCrawler] = ZLayer.succeed(new MinStockCrawlerImpl)
