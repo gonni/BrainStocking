@@ -12,13 +12,15 @@ import net.ruippeixotog.scalascraper.dsl.DSL.Parse._
 import x.yg.crawl.utils.DataUtil
 
 trait MinStockCrawler {
-  def crawl(stockCode: String, targetDt: String): ZIO[Client & DataDownloader, Throwable, List[StockMinVolumeTable]]
+  def crawl(stockCode: String, targetDt: String = DataUtil.stockTimestamp(), pageNo: Int = 1): 
+    ZIO[Client & DataDownloader, Throwable, List[StockMinVolumeTable]]
 }
 
 class MinStockCrawlerImpl extends MinStockCrawler {
-  override def crawl(stockCode: String, targetDt: String): ZIO[Client & DataDownloader, Throwable, List[StockMinVolumeTable]] = for {
+  override def crawl(stockCode: String, targetDt: String, pageNo: Int): 
+    ZIO[Client & DataDownloader, Throwable, List[StockMinVolumeTable]] = for {
     downloader <- ZIO.service[DataDownloader]
-    data <- downloader.download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=20241119161049&page=1")
+    data <- downloader.download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
     res <- ZIO.attempt(extractFilteredData(data))
   } yield res
 
