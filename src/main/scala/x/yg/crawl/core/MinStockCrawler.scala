@@ -21,10 +21,10 @@ class MinStockCrawlerImpl extends MinStockCrawler {
     ZIO[Client & DataDownloader, Throwable, List[StockMinVolumeTable]] = for {
     downloader <- ZIO.service[DataDownloader]
     data <- downloader.download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
-    res <- ZIO.attempt(extractFilteredData(data))
+    res <- ZIO.attempt(extractFilteredData(data, targetDt))
   } yield res
 
-  private def extractFilteredData(data: String): List[StockMinVolumeTable] = {
+  private def extractFilteredData(data: String, targetDay: String): List[StockMinVolumeTable] = {
     val browser = new JsoupBrowser()
     val dom = browser.parseString(data)
 
