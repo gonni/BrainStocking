@@ -19,9 +19,11 @@ trait MinStockCrawler {
 class MinStockCrawlerImpl extends MinStockCrawler {
   override def crawl(stockCode: String, targetDt: String, pageNo: Int): 
     ZIO[Client & DataDownloader, Throwable, List[StockMinVolumeTable]] = for {
-    downloader <- ZIO.service[DataDownloader]
-    data <- downloader.download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
-    res <- ZIO.attempt(extractFilteredData(data, targetDt))
+      _ <- ZIO.log(s"Crawling from ${stockCode} at ${targetDt} with page ${pageNo}")
+      _ <- ZIO.log(s"crawl url -> https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
+      downloader <- ZIO.service[DataDownloader]
+      data <- downloader.download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
+      res <- ZIO.attempt(extractFilteredData(data, targetDt))
   } yield res
 
   private def extractFilteredData(data: String, targetDay: String): List[StockMinVolumeTable] = {

@@ -17,13 +17,13 @@ object DataUtil {
 
   //2024-11-19 16:10:49
   def getCurrentTimestamp(): String = {
-    val now = LocalDateTime.now()
+    val now = LocalDateTime.now().plusDays(-2)
     val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
     now.format(formatter)
   }
 
   def stockTimestamp(): String = {
-    val curTs = getCurrentTimestamp() 
+    val curTs = getCurrentTimestamp()
     curTs.substring(0, 8) match {
       case a if a > "161009" => curTs.substring(0, 8) + "161009"
       case _ => curTs
