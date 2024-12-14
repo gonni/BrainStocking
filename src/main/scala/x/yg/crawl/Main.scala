@@ -11,6 +11,7 @@ import zio.ZIO
 import zio.ZIOAppDefault
 import x.yg.crawl.api.ServiceController
 import x.yg.crawl.data.StockRepo
+import x.yg.crawl.data.ScheduleRepo
 
 object Main extends ZIOAppDefault { 
   
@@ -29,6 +30,7 @@ object Main extends ZIOAppDefault {
       Server.defaultWithPort(8080),
       ServiceController.live,
       StockRepo.live,
+      ScheduleRepo.live,
       Quill.Mysql.fromNamingStrategy(SnakeCase),
       Quill.DataSource.fromPrefix("StockMysqlAppConfig")
     )

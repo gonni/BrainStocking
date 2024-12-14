@@ -12,20 +12,21 @@ import x.yg.crawl.DataDownloader
 import zio.http.netty.NettyConfig
 import zio.http.netty.client.NettyClientDriver
 
-object Scheduler extends ZIOAppDefault {
+object CrawlScheduler extends ZIOAppDefault {
 
-  val program = for {
+  val unitProc = (stockCode: String) => for {
     _ <- ZIO.log("Hello World")
     stockRepo <- ZIO.service[StockRepo]
-    // _ <- stockRepo.selectStockItemsAll().map(_.foreach(println))
-    // _ <- ZIO.succeed(println("Hello World")) repeat (Schedule.recurs(5) && Schedule.fixed(1.seconds))
     crawler <- ZIO.service[MinStockCrawler]
-    cd <- crawler.crawl("205470")
-    // _ <- ZIO.never
+    // cd <- crawler.crawl("205470")
+    cd <- crawler.crawl(stockCode)
+    stockRepo <- ZIO.service[StockRepo]
+    // res <- stockRepo.insertStockMinVolumeBulk(cd)
+    res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
   } yield cd.foreach(println)
   
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-    program.provide(
+    unitProc("205470").provide(
       Client.customized,
       NettyClientDriver.live,
       ZLayer.succeed(NettyConfig.default),

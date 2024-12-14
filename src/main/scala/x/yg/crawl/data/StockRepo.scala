@@ -12,7 +12,7 @@ import zio.schema.DeriveSchema._
 import scala.meta.internal.javacp.BaseType.S
 import java.sql.SQLException
 
-case class StockMinVolumeTable(tsCode: String, fixedPrice: Double, sellAmt: Int, buyAmt: Int, volume: Int)
+case class StockMinVolumeTable(itemCode: String, tsCode: String, fixedPrice: Double, sellAmt: Int, buyAmt: Int, volume: Int)
 object StockMinVolumeTable:
   given Schema[StockMinVolumeTable] = DeriveSchema.gen[StockMinVolumeTable]
 
@@ -25,6 +25,7 @@ trait StockRepo {
   def selectStockItemsAll(): ZIO[Any, Throwable, List[StockItem]]
   def insertStockMinVolume(stockMinVolume: StockMinVolumeTable): ZIO[Any, Throwable, Long]
   def insertStockMinVolumeBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]]
+  def insertStockMinVolumeSerialBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]]
   def selectStockMinVolume(tsCode: String): Task[List[StockMinVolumeTable]]   
 }
 
@@ -49,6 +50,12 @@ class StockRepoImpl(quill: Quill.Mysql[SnakeCase]) extends StockRepo {
       liftQuery(stockMinVolume).foreach(e => qryStockMinVolumeTable.insertValue(e))
     )
 
+  override def insertStockMinVolumeSerialBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]] = {
+    ZIO.collectAllPar(
+      stockMinVolume.map(e => run(qryStockMinVolumeTable.insertValue(lift(e)).onConflictIgnore(_.itemCode, _.tsCode)))
+    )
+  }
+  
   override def selectStockMinVolume(tsCode: String): Task[List[StockMinVolumeTable]] =
     run(
       qryStockMinVolumeTable.filter(_.tsCode == lift(tsCode))

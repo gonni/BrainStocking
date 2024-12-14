@@ -22,13 +22,13 @@ object DailyCrawler extends ZIOAppDefault {
     data <- downloader.download("https://finance.naver.com/item/sise_time.naver?code=205470&thistime=20241119161049&page=1")
     // _ <- Console.printLine("downloaded => " + data)
     // _ <- ZIO.succeed(processingData(data))
-    filtered <- extractFilteredData(data)
+    filtered <- extractFilteredData("205470", data)
     stockRepo <- ZIO.service[StockRepo]
     res <- stockRepo.insertStockMinVolumeBulk(filtered)
     _ <- Console.printLine("filtered => " + filtered)
   } yield ()
 
-  def extractFilteredData(data: String): ZIO[Any, Throwable, List[StockMinVolumeTable]] = {
+  def extractFilteredData(stockCode: String = "NA", data: String): ZIO[Any, Throwable, List[StockMinVolumeTable]] = {
     val browser = new JsoupBrowser()
     val dom = browser.parseString(data)
 
@@ -45,7 +45,7 @@ object DailyCrawler extends ZIOAppDefault {
             val volume = DataUtil convertNumTextToInt tds(5).text//.toInt
             println(tsCode + "-->" + fixedPrice + "-->" + sellAmt + "-->" + buyAmt + "-->" + volume)
 
-            List(StockMinVolumeTable(tsCode, fixedPrice, sellAmt, buyAmt, volume))
+            List(StockMinVolumeTable(stockCode, tsCode, fixedPrice, sellAmt, buyAmt, volume))
             // List(StockMinVolumeTable("1", 1.0, 1, 1, 1))
           case _ => List()
         }
