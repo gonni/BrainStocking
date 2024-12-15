@@ -46,7 +46,6 @@ object DailyCrawler extends ZIOAppDefault {
             println(tsCode + "-->" + fixedPrice + "-->" + sellAmt + "-->" + buyAmt + "-->" + volume)
 
             List(StockMinVolumeTable(stockCode, tsCode, fixedPrice, sellAmt, buyAmt, volume))
-            // List(StockMinVolumeTable("1", 1.0, 1, 1, 1))
           case _ => List()
         }
       }

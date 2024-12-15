@@ -18,7 +18,6 @@ case class ServiceController private(stockRepo: StockRepo, scheduleRepo: Schedul
         _ => Response.text("Success")
       )
     },
-
   )
 }
 
