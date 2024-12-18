@@ -19,12 +19,12 @@ object DailyCrawler extends ZIOAppDefault {
 
   val program = for {
     downloader <- ZIO.service[DataDownloader]
-    data <- downloader.download("https://finance.naver.com/item/sise_time.naver?code=205470&thistime=20241119161049&page=1")
+    data <- downloader.download("https://finance.naver.com/item/sise_time.naver?code=205470&thistime=20241218161049&page=11")
     // _ <- Console.printLine("downloaded => " + data)
     // _ <- ZIO.succeed(processingData(data))
     filtered <- extractFilteredData("205470", data)
-    stockRepo <- ZIO.service[StockRepo]
-    res <- stockRepo.insertStockMinVolumeBulk(filtered)
+    // stockRepo <- ZIO.service[StockRepo]
+    // res <- stockRepo.insertStockMinVolumeBulk(filtered)
     _ <- Console.printLine("filtered => " + filtered)
   } yield ()
 
@@ -38,6 +38,8 @@ object DailyCrawler extends ZIOAppDefault {
         val tds = x >> elementList("td")
         tds.length match {
           case a if a > 5 => 
+            //TODO need to catch exception
+            
             val tsCode = tds(0).text
             val fixedPrice = DataUtil convertNumTextToInt tds(1).text//.toDouble
             val sellAmt = DataUtil convertNumTextToInt tds(3).text//.toInt 
