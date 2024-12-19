@@ -23,7 +23,8 @@ class MinStockCrawlerImpl extends MinStockCrawler {
       _ <- ZIO.log(s"crawl url -> https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
       downloader <- ZIO.service[DataDownloader]
       data <- downloader.download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
-      res <- ZIO.attempt(extractFilteredData(stockCode, data, targetDt))
+      res <- ZIO.attempt(extractFilteredData(stockCode, data, targetDt)).catchAll(e => 
+        ZIO.log("Processing Failed :" + e.getLocalizedMessage()) *> ZIO.succeed(List.empty[StockMinVolumeTable]))
   } yield res
 
   private def extractFilteredData(itemCode: String, data: String, targetDay: String): List[StockMinVolumeTable] = {

@@ -51,7 +51,7 @@ class StockRepoImpl(quill: Quill.Mysql[SnakeCase]) extends StockRepo {
     )
 
   override def insertStockMinVolumeSerialBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]] = {
-    ZIO.collectAllPar(
+    ZIO.collectAll(
       stockMinVolume.map(e => run(qryStockMinVolumeTable.insertValue(lift(e)).onConflictIgnore(_.itemCode, _.tsCode)))
     )
   }
