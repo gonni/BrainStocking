@@ -31,8 +31,8 @@ object DataUtil {
   }
   //2024-11-19 16:10:49 --> 20241119161049  --> 20241127181614
 
-  def stockTimestamp(): String = {
-    val now = LocalDateTime.now().plusDays(0)
+  def stockTimestamp(dayOffset: Int = 0): String = {
+    val now = LocalDateTime.now().plusDays(dayOffset)
     val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
     val formattedNow = now.format(formatter)
     val fixedTime = "161049"

@@ -20,7 +20,7 @@ object BulkCrawlScheduler extends ZIOAppDefault {
 
 	def crawlDayData(stockCode: String, targetDt: String = DataUtil.stockTimestamp()) = {
 		ZIO.collectAllDiscard(
-			(1 to 40).map { pageNo => 
+			(11 to 12).map { pageNo => 
 				for {
 					crawler <- ZIO.service[MinStockCrawler]
 					cd <- crawler.crawl(stockCode, targetDt, pageNo)
@@ -33,7 +33,7 @@ object BulkCrawlScheduler extends ZIOAppDefault {
 	}
 
 	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-		crawlDayData("205470").provide(
+		crawlDayData("205470", DataUtil.stockTimestamp(-1)).provide(
 			Client.customized,
 			NettyClientDriver.live,
 			ZLayer.succeed(NettyConfig.default),

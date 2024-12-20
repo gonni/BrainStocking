@@ -10,6 +10,9 @@ import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
 import net.ruippeixotog.scalascraper.dsl.DSL.Parse._
 import x.yg.crawl.utils.DataUtil
+import scala.util.Try
+import scala.util.Success
+import scala.util.Failure
 
 trait MinStockCrawler {
   def crawl(stockCode: String, targetDt: String = DataUtil.stockTimestamp(), pageNo: Int = 1): 
@@ -37,14 +40,20 @@ class MinStockCrawlerImpl extends MinStockCrawler {
         val tds = x >> elementList("td")
         tds.length match {
           case a if a > 5 => 
-            val tsCode = targetDay.substring(0,8) + "_" + tds(0).text
-            val fixedPrice = DataUtil convertNumTextToInt tds(1).text//.toDouble
-            val sellAmt = DataUtil convertNumTextToInt tds(3).text//.toInt 
-            val buyAmt = DataUtil convertNumTextToInt tds(4).text//.toInt
-            val volume = DataUtil convertNumTextToInt tds(5).text//.toInt
-            println(tsCode + "-->" + fixedPrice + "-->" + sellAmt + "-->" + buyAmt + "-->" + volume)
-
-            List(StockMinVolumeTable(itemCode, tsCode, fixedPrice, sellAmt, buyAmt, volume))
+            Try {
+              val tsCode = targetDay.substring(0,8) + "_" + tds(0).text
+              val fixedPrice = DataUtil convertNumTextToInt tds(1).text//.toDouble
+              val sellAmt = DataUtil convertNumTextToInt tds(3).text//.toInt 
+              val buyAmt = DataUtil convertNumTextToInt tds(4).text//.toInt
+              val volume = DataUtil convertNumTextToInt tds(5).text//.toInt
+              println(tsCode + "-->" + fixedPrice + "-->" + sellAmt + "-->" + buyAmt + "-->" + volume)
+              List(StockMinVolumeTable(itemCode, tsCode, fixedPrice, sellAmt, buyAmt, volume))
+            } match {
+              case Success(value) => value
+              case Failure(exception) => 
+                println("Failed to parse data : " + exception.getLocalizedMessage())
+                List()
+            }
             // List(StockMinVolumeTable("1", 1.0, 1, 1, 1))
           case _ => List()
         }
