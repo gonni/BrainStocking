@@ -20,20 +20,20 @@ object BulkCrawlScheduler extends ZIOAppDefault {
 
 	def crawlDayData(stockCode: String, targetDt: String = DataUtil.stockTimestamp()) = {
 		ZIO.collectAllDiscard(
-			(11 to 12).map { pageNo => 
-				for {
+			(1 to 39).map { pageNo => 
+				(for {
 					crawler <- ZIO.service[MinStockCrawler]
 					cd <- crawler.crawl(stockCode, targetDt, pageNo)
 					stockRepo <- ZIO.service[StockRepo]
 					res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
 					_ <- ZIO.sleep(Duration(1, TimeUnit.SECONDS)) *> ZIO.log(s"Done crawlDayData ${stockCode} ${targetDt} ${pageNo}")
-				} yield ()
+				} yield ()).ignore
 			}
 		) *> ZIO.log(s"crawl daily data of $stockCode done ..")
 	}
 
 	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-		crawlDayData("205470", DataUtil.stockTimestamp(-1)).provide(
+		crawlDayData("005880", DataUtil.stockTimestamp(0)).provide(
 			Client.customized,
 			NettyClientDriver.live,
 			ZLayer.succeed(NettyConfig.default),

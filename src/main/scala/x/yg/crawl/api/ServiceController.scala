@@ -18,6 +18,14 @@ case class ServiceController private(stockRepo: StockRepo, scheduleRepo: Schedul
         _ => Response.text("Success")
       )
     },
+    Method.GET / "stock" / string("stockCode") / string("targetDay") -> handler {
+      (stockCode: String, targetDay: String, _: Request) =>
+        ZIO.log("detected fire") *> 
+        stockRepo.selectStockDataByItemCode(stockCode, targetDay).mapBoth (
+          e => Response.text(e.toString),
+          res => Response(body = Body.from(res))
+        )
+    }
   )
 }
 

@@ -28,9 +28,9 @@ object CrawlScheduler extends ZIOAppDefault {
     crawler <- ZIO.service[MinStockCrawler]
     // cd <- crawler.crawl("205470")
     cd <- crawler.crawl(stockCode)
-    stockRepo <- ZIO.service[StockRepo]
+    // stockRepo <- ZIO.service[StockRepo]
     // res <- stockRepo.insertStockMinVolumeBulk(cd)
-    res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
+    // res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
   } yield cd.foreach(println)
   
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 

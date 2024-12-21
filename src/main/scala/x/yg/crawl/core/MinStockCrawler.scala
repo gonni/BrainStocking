@@ -25,7 +25,9 @@ class MinStockCrawlerImpl extends MinStockCrawler {
       _ <- ZIO.log(s"Crawling from ${stockCode} at ${targetDt} with page ${pageNo}")
       _ <- ZIO.log(s"crawl url -> https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
       downloader <- ZIO.service[DataDownloader]
-      data <- downloader.download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
+      data <- downloader
+        .download(s"https://finance.naver.com/item/sise_time.naver?code=${stockCode}&thistime=${targetDt}&page=${pageNo}")
+        .retry(Schedule.recurs(3) && Schedule.spaced(1.second))
       res <- ZIO.attempt(extractFilteredData(stockCode, data, targetDt)).catchAll(e => 
         ZIO.log("Processing Failed :" + e.getLocalizedMessage()) *> ZIO.succeed(List.empty[StockMinVolumeTable]))
   } yield res
@@ -49,7 +51,11 @@ class MinStockCrawlerImpl extends MinStockCrawler {
               println(tsCode + "-->" + fixedPrice + "-->" + sellAmt + "-->" + buyAmt + "-->" + volume)
               List(StockMinVolumeTable(itemCode, tsCode, fixedPrice, sellAmt, buyAmt, volume))
             } match {
-              case Success(value) => value
+              case Success(value) => value match {
+                case List(StockMinVolumeTable(_, _, a, _, _, _)) if a <= 2 => List()
+                // case List(StockMinVolumeTable(_, _, 2, _, _, _)) => List()
+                case _ => value
+              }
               case Failure(exception) => 
                 println("Failed to parse data : " + exception.getLocalizedMessage())
                 List()

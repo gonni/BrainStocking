@@ -23,6 +23,8 @@ object StockItem:
 // ---
 trait StockRepo {
   def selectStockItemsAll(): ZIO[Any, Throwable, List[StockItem]]
+  def selectStockDataByItemCode(itemCode: String, targetDay: String): ZIO[Any, Throwable, List[StockMinVolumeTable]]
+  // ---
   def insertStockMinVolume(stockMinVolume: StockMinVolumeTable): ZIO[Any, Throwable, Long]
   def insertStockMinVolumeBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]]
   def insertStockMinVolumeSerialBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]]
@@ -38,6 +40,13 @@ class StockRepoImpl(quill: Quill.Mysql[SnakeCase]) extends StockRepo {
   override def selectStockItemsAll(): ZIO[Any, Throwable, List[StockItem]] = 
     run(
       qryStockItemsTable
+    )
+
+  def selectStockDataByItemCode(itemCode: String, targetDay: String): ZIO[Any, Throwable, List[StockMinVolumeTable]] = 
+    run(
+      qryStockMinVolumeTable
+        .filter(e => e.itemCode == lift(itemCode) && e.tsCode.startsWith(lift(targetDay)))
+        .sortBy(e => e.tsCode)(Ord.asc)
     )
 
   override def insertStockMinVolume(stockMinVolume: StockMinVolumeTable): ZIO[Any, Throwable, Long] =
