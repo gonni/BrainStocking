@@ -33,7 +33,7 @@ object BulkCrawlScheduler extends ZIOAppDefault {
 	}
 
 	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-		crawlDayData("005880", DataUtil.stockTimestamp(0)).provide(
+		crawlDayData("097230", DataUtil.stockTimestamp(0)).provide(
 			Client.customized,
 			NettyClientDriver.live,
 			ZLayer.succeed(NettyConfig.default),

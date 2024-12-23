@@ -1,11 +1,11 @@
 package x.yg.analyser
 
-import zio._
-import zio.stream._
-import x.yg.crawl.data.StockRepo
 import io.getquill.SnakeCase
 import io.getquill.jdbczio.Quill
 import x.yg.crawl.data.StockMinVolumeTable
+import x.yg.crawl.data.StockRepo
+import zio.*
+import zio.stream.*
 
 trait EndPriceAnalyzer {
   def analyze(stockCode: String, targetDt: String = "20210801"): ZIO[StockRepo, Throwable, Any]
@@ -34,11 +34,12 @@ class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
         val expectedY = firstElem.map(a => a.fixedPrice - slope * idx) 
         val error = expectedY.map(exp => Math.abs(element.fixedPrice - exp) / exp)
         error match {
-          case Some(e) if e <= 0.2 => inCount + 1
+          case Some(e) if e <= allowedError => inCount + 1
           case _ => inCount
         }
       }
-      finResult <- ZIO.succeed(result > data.length * 0.8)
+      _ <- Console.printLine(s"Result : ${result} / ${data.length}")
+      finResult <- ZIO.succeed(result > data.length * 0.83)
     } yield finResult).catchAll(e => ZIO.succeed(false))
     
   }
@@ -59,7 +60,7 @@ object RunnerMain extends ZIOAppDefault {
 
   val app = for {
     analyzer <- ZIO.service[EndPriceAnalyzer]
-    result <- analyzer.analyze("005880", "20241220")
+    result <- analyzer.analyze("042700", "20241223")
   } yield result
 
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
