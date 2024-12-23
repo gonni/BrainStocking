@@ -11,6 +11,11 @@ import scala.math._
 
 object AnalyzerMain extends ZIOAppDefault {
 
+  def getDailyStockData(stockCode: String, targetDt: String) = for {
+    repo <- ZIO.service[StockRepo]
+    targetData <- repo.selectStockDataByItemCode(stockCode, targetDt)
+  } yield targetData
+
   def makeDataStream(stockCode: String, targetDt: String): ZStream[StockRepo, Throwable, StockMinVolumeTable] = 
     ZStream.fromZIO(getDailyStockData(stockCode, targetDt)).flatMap(ZStream.fromIterable)
 
@@ -55,7 +60,7 @@ object AnalyzerMain extends ZIOAppDefault {
   }
 
   val parogram = for {
-    isTrending <- checkUpwardTrend(makeDataStream("005880", "20241220"))
+    isTrending <- checkUpwardTrend(makeDataStream("095190", "20241220"))
     _ <- ZIO.succeed {
       isTrending match {
         case true => println("Upward Trend")
