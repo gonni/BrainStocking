@@ -12,7 +12,10 @@ import zio.http.netty.NettyConfig
 import zio.http.netty.client.NettyClientDriver
 
 import java.util.concurrent.TimeUnit
-import javax.xml.crypto.Data
+// import javax.xml.crypto.Data
+
+
+
 
 object RealtimeCrawlScheduler extends ZIOAppDefault {
 
@@ -28,9 +31,7 @@ object RealtimeCrawlScheduler extends ZIOAppDefault {
         case Nil => ZIO.succeed(false)
         case x :: xs => 
           for {
-            // _ <- ZIO.succeed(println("check queue => " + queue.indexOf(x) + ", size => " + queue.size))
             result <- x.offer(effect)
-            // _ <- ZIO.succeed(println("result -> " + result + ", try add to queue =>" + queue.indexOf(x)))
             res <- result match {
               case true => ZIO.succeed(true)
               case false => 
@@ -46,7 +47,6 @@ object RealtimeCrawlScheduler extends ZIOAppDefault {
     for {
       queue <- queueRef.get
       addRes <- inputDataAndExtendQueue(queue)(runFunc)
-      // _ <- ZIO.succeed(println("addRes => " + addRes))
       _ <- addRes match {
         case true => ZIO.unit
         case false => for {
@@ -56,8 +56,6 @@ object RealtimeCrawlScheduler extends ZIOAppDefault {
           _ <- unitQueueWorker(q).fork
         } yield ()
       }
-      // _ <- queueRef.update(queue :: _)
-      // _ <- producer(queue)
     } yield ()
   }
 
@@ -65,14 +63,9 @@ object RealtimeCrawlScheduler extends ZIOAppDefault {
     (for {
       job <- queue.take
       _ <- Console.printLine(job + " by worker").ignore
-      // _ <- ZIO.succeed(job)
-      // _ <- ZIO.succeed(println("size of queue =>" + size))
-      // _ <- ZIO.sleep(Duration(1, TimeUnit.SECONDS))
-      // _ <- ZIO.sleep(Duration(1, TimeUnit.SECONDS))
     } yield ()).repeat(Schedule.spaced(1.seconds)).unit  
 
-
-  def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = for {
+  val app =  for {
     queueRef <- Ref.make(List.empty[Queue[String]])
     _ <- ZIO.foreach(1 to 30) { _ =>
       for {
@@ -82,38 +75,6 @@ object RealtimeCrawlScheduler extends ZIOAppDefault {
     }
     _ <- ZIO.succeed(println("process completed ..."))
   } yield ()
+
+  def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = app.exitCode
 }
-
-// object CrawlScheduler extends ZIOAppDefault {
-
-//   def producer(queue: Queue[String]): ZIO[Any, Nothing, Unit] = 
-//     (for {
-//       _ <- ZIO.sleep(Duration(10, TimeUnit.SECONDS))
-//       // _ <- queue.offer("068270")
-//     } yield ()).repeat(Schedule.spaced(1.second)).unit
-
-
-//   val unitProc = (stockCode: String) => for {
-//     _ <- ZIO.log("Hello World")
-//     stockRepo <- ZIO.service[StockRepo]
-//     crawler <- ZIO.service[MinStockCrawler]
-//     // cd <- crawler.crawl("205470")
-//     cd <- crawler.crawl(stockCode)
-//     // stockRepo <- ZIO.service[StockRepo]
-//     // res <- stockRepo.insertStockMinVolumeBulk(cd)
-//     // res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
-//   } yield cd.foreach(println)
-  
-//   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-//     unitProc("205470").provide(
-//       Client.customized,
-//       NettyClientDriver.live,
-//       ZLayer.succeed(NettyConfig.default),
-//       DnsResolver.default,
-//       DataDownloader.live,
-//       MinStockCrawler.live,
-//       StockRepo.live,
-//       Quill.Mysql.fromNamingStrategy(SnakeCase),
-//       Quill.DataSource.fromPrefix("StockMysqlAppConfig")
-//     )
-// }
