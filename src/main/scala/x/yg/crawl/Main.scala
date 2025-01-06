@@ -3,15 +3,16 @@ package x.yg.crawl
 
 import io.getquill.SnakeCase
 import io.getquill.jdbczio.Quill
+import x.yg.crawl.api.ServiceController
+import x.yg.crawl.data.CrawlStatusRepo
+import x.yg.crawl.data.ScheduleRepo
+import x.yg.crawl.data.StockRepo
 import zio.*
+import zio.ZIO
+import zio.ZIOAppDefault
 import zio.http.*
 import zio.http.Middleware.basicAuth
 import java.net.URI
-import zio.ZIO
-import zio.ZIOAppDefault
-import x.yg.crawl.api.ServiceController
-import x.yg.crawl.data.StockRepo
-import x.yg.crawl.data.ScheduleRepo
 
 object Main extends ZIOAppDefault { 
   
@@ -31,6 +32,7 @@ object Main extends ZIOAppDefault {
       ServiceController.live,
       StockRepo.live,
       ScheduleRepo.live,
+      CrawlStatusRepo.live,
       Quill.Mysql.fromNamingStrategy(SnakeCase),
       Quill.DataSource.fromPrefix("StockMysqlAppConfig")
     )

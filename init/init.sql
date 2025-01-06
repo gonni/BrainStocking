@@ -23,3 +23,12 @@ create table STOCK_INFO (
 	LAST_SYNCED timestamp,
 	CRAWL_STATUS int
 );
+
+-- stock.stock_crawl_status definition
+
+CREATE TABLE `stock_crawl_status` (
+  `item_code` varchar(12) COLLATE utf8mb4_general_ci NOT NULL,
+  `latest_crawl_dt` timestamp NULL DEFAULT NULL,
+  `status_code` varchar(4) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`item_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
