@@ -26,11 +26,22 @@ object UnitJobScheduler2 {
 // }
 
 case class UnitCrawlJob(crawlStatusRepo: CrawlStatusRepo) extends Job[String] {
-	def run: ZIO[Any, Throwable, String] = 
-		ZIO.succeedBlocking{
-			println("-> run joblet proceessing : " + java.time.LocalDateTime.now)
-			"Succeed"
+	val fixedPeriod = 10
+	def run: ZIO[Any, Throwable, String] = for {
+		expiredItemCodes <- crawlStatusRepo.getExpiredItemCode(fixedPeriod)
+		_ <- ZIO.log("Create target itemCodes : " + expiredItemCodes)
+		_ <- ZIO.foreach(expiredItemCodes){itemCode => 
+			for {
+				_ <- crawlStatusRepo.syncCrawlStatus(itemCode, "RUN")
+				_ <- ZIO.sleep(Duration(1, TimeUnit.SECONDS))
+				_ <- crawlStatusRepo.syncCrawlStatus(itemCode, "WAIT")
+			} yield ()
 		}
+	} yield "Done"
+		// ZIO.succeedBlocking{
+		// 	println("-> run joblet proceessing : " + java.time.LocalDateTime.now)
+		// 	"Succeed"
+		// }
 }
 
 
@@ -61,7 +72,8 @@ class UnitJobScheduler2Impl(queueRef: Ref[List[Queue[Job[String]]]], jobProducer
 			res <- job.run.catchAll(e => ZIO.succeed(e.getMessage())) // ----------------> Rrocessing job
 			_ <- Console.printLine(res + " by worker #" + workerId).ignore	// log
 		} yield ()).repeat(Schedule.spaced(1.seconds)).unit  
-
+	
+	// add new job	
 	def addJob(job: Job[String]) = 
 		for {
 			queue <- queueRef.get
@@ -76,8 +88,9 @@ class UnitJobScheduler2Impl(queueRef: Ref[List[Queue[Job[String]]]], jobProducer
 				} yield ()
 			}
 		} yield ()
-
-	def startWorker = {
+	
+	// produce continouse jobs
+	def autoJobProduce = {
 		(for {
 			data <- jobProducer.unitProduce	// ----------------> Producing Job
 			_ <- Console.printLine("produce data: " + data)
@@ -89,7 +102,7 @@ class UnitJobScheduler2Impl(queueRef: Ref[List[Queue[Job[String]]]], jobProducer
 object Main0 extends ZIOAppDefault {
 	val app = for {
 		scheduler <- UnitJobScheduler2.create
-		_ <- scheduler.startWorker
+		_ <- scheduler.autoJobProduce
 	} yield ()
 	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = app.exitCode
 }

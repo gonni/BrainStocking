@@ -15,8 +15,6 @@ import java.util.concurrent.TimeUnit
 // import javax.xml.crypto.Data
 
 
-
-
 object RealtimeCrawlScheduler extends ZIOAppDefault {
 
   // def runFunc: ZIO[Any, Throwable, Unit] = 
@@ -58,7 +56,8 @@ object RealtimeCrawlScheduler extends ZIOAppDefault {
       }
     } yield ()
   }
-
+  
+  // processing ...
   private def unitQueueWorker(queue: Queue[String]): ZIO[Any, Nothing, Unit] = 
     (for {
       job <- queue.take

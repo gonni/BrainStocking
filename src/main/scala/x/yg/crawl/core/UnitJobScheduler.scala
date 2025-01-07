@@ -53,6 +53,7 @@ class JobProducerImpl() extends JobProducer[String] {
   // }
 }
 
+@deprecated
 object UnitJobScheduler extends ZIOAppDefault {
   // def runFunc: String = "Hello World at " + java.time.LocalDateTime.now
 
