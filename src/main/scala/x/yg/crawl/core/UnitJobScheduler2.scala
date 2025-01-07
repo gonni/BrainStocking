@@ -12,6 +12,7 @@ import zio.http.netty.NettyConfig
 import zio.http.netty.client.NettyClientDriver
 
 import java.util.concurrent.TimeUnit
+import x.yg.crawl.data.CrawlStatusRepo
 
 object UnitJobScheduler2 {
 	def create = {
@@ -24,7 +25,7 @@ object UnitJobScheduler2 {
 // 	// def startWorker: ZIO[Any, Throwable, Unit]
 // }
 
-case class UnitCrawlJob() extends Job[String] {
+case class UnitCrawlJob(crawlStatusRepo: CrawlStatusRepo) extends Job[String] {
 	def run: ZIO[Any, Throwable, String] = 
 		ZIO.succeedBlocking{
 			println("-> run joblet proceessing : " + java.time.LocalDateTime.now)

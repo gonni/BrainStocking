@@ -6,6 +6,7 @@ import io.getquill.jdbczio.Quill
 import io.getquill.*
 import java.sql.Timestamp
 import java.util.concurrent.TimeUnit
+  import io.getquill.extras.SqlTimestampOps
 
 
 case class CrawlStatus(
@@ -18,10 +19,18 @@ trait CrawlStatusRepo {
   def syncCrawlStatus(itemCode: String, crawlStatus: String): ZIO[Any, Throwable, Long]
   def getCrawlStatus(itemCode: String) : ZIO[Any, Throwable, CrawlStatus]
   def getTargetToCrawl(statusCode: String): ZIO[Any, Throwable, List[String]]
+  def getExpiredItemCode(min: Int): ZIO[Any, Throwable, List[String]]
 }
 
 class CrawlStatusRepoImpl (quill: Quill.Mysql[SnakeCase]) extends CrawlStatusRepo {
   import quill._
+
+  override def getExpiredItemCode(min: Int): ZIO[Any, Throwable, List[String]] = 
+    run(
+      qryCrawlStatusTable
+        .filter(_.latestCrawlDt < lift(new Timestamp(java.lang.System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(min))))
+    ).map(_.map(_.itemCode))
+
   private inline def qryCrawlStatusTable = quote(querySchema[CrawlStatus](entity = "STOCK_CRAWL_STATUS"))
 
   // upsert data

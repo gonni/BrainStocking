@@ -35,6 +35,13 @@ case class ServiceController private(stockRepo: StockRepo, scheduleRepo: Schedul
           e => Response.text(e.toString),
           res => Response(body = Body.from(res))
         )
+    },
+    Method.GET / "stock" / "crawl" / "target" / int("min") -> handler{(min: Int, req: Request) =>
+      ZIO.log("Get target itemCode for realtime crawl") *> 
+      crawlStatusRepo.getExpiredItemCode(min).mapBoth (
+        e => Response.text(e.toString),
+        res => Response(body = Body.from(res))
+      )
     }
   )
 }
