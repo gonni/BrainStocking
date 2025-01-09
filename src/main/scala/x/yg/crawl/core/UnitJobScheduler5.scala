@@ -20,11 +20,16 @@ class CrawlJobScheduler(
 	jobProducer: JobProducer[String],
 	stockRepo: StockRepo, 
 	crawler: MinStockCrawler) extends UnitJobScheduler5(queueRef, jobProducer) {
+
+	override def unitProduce: ZIO[Any, Nothing, List[String]] = ???
+
 	override def processJob(queue: Queue[String], workerId: Int = -1): ZIO[Any, Nothing, Unit] = 
 		(for {
 			itemCode <- queue.take
 			cd <- crawler.crawl(itemCode)
-			_ <- Console.printLine(itemCode + " by worker #" + workerId).ignore	// log
+			// res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
+			// _ <- ZIO.foreach(cd){r => Console.printLine(r.toString())}
+			_ <- Console.printLine(s"Inserted data ${cd.size} for $itemCode by worker #$workerId").ignore	// log
 		} yield ()).repeat(Schedule.spaced(1.seconds))
 		.provide(
 			Client.customized,
@@ -32,18 +37,18 @@ class CrawlJobScheduler(
 			ZLayer.succeed(NettyConfig.default),
 			DnsResolver.default,
 			DataDownloader.live,
-			StockRepo.live,
-			Quill.Mysql.fromNamingStrategy(SnakeCase),
-			Quill.DataSource.fromPrefix("StockMysqlAppConfig")
+			// StockRepo.live,
+			// Quill.Mysql.fromNamingStrategy(SnakeCase),
+			// Quill.DataSource.fromPrefix("StockMysqlAppConfig")
 		)
-		.unit.catchAll(e => Console.printLine(e.getMessage()).ignore)
+		.unit.catchAll(e => ZIO.log(e.getMessage()).ignore)
 }
 
 
 abstract class UnitJobScheduler5 (
 	queueRef: Ref[List[Queue[String]]], 
 	jobProducer: JobProducer[String], 
-	queueSize: Int = 10) {
+	queueSize: Int = 10) extends JobProducer[String] {
 
 	private def inputDataAndExtendQueue(queue: List[Queue[String]])(effect : => String): ZIO[Any, Nothing, Boolean] = 
 		for {
@@ -96,4 +101,34 @@ abstract class UnitJobScheduler5 (
 			_ <- ZIO.foreach(data){r => addJob(r)}
 		} yield ()).repeat(Schedule.spaced(1.seconds)).unit  
 	}	
+}
+
+object Main1 extends ZIOAppDefault {
+	
+	val app = for {
+		queueRef <- Ref.make(List.empty[Queue[String]])
+		stockRepo <- ZIO.service[StockRepo]
+		crawler <- ZIO.service[MinStockCrawler]
+		scheduler <- CrawlJobScheduler(
+			queueRef, 
+			new JobProducer[String] {
+				override def unitProduce = ZIO.succeed(List("068270", "205470", "005930"))
+			},
+			stockRepo,
+			crawler
+		).autoJobProduce
+	} yield ()
+	
+	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
+		app.provide(
+			Client.customized,
+			NettyClientDriver.live,
+			ZLayer.succeed(NettyConfig.default),
+			DnsResolver.default,
+			DataDownloader.live,
+			MinStockCrawler.live,
+			StockRepo.live,
+			Quill.Mysql.fromNamingStrategy(SnakeCase),
+			Quill.DataSource.fromPrefix("StockMysqlAppConfig")
+		).exitCode	
 }
