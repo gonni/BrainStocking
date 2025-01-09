@@ -25,8 +25,10 @@ object UnitJobScheduler2 {
 // 	// def startWorker: ZIO[Any, Throwable, Unit]
 // }
 
-case class UnitCrawlJob(crawlStatusRepo: CrawlStatusRepo) extends Job[String] {
+case class UnitCrawlJob(crawlStatusRepo: CrawlStatusRepo, 
+	stockRepo: StockRepo, minStockCrawler: MinStockCrawler) extends Job[String] {
 	val fixedPeriod = 10
+	
 	def run: ZIO[Any, Throwable, String] = for {
 		expiredItemCodes <- crawlStatusRepo.getExpiredItemCode(fixedPeriod)
 		_ <- ZIO.log("Create target itemCodes : " + expiredItemCodes)
