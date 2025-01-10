@@ -19,9 +19,17 @@ class CrawlJobScheduler(
 	queueRef: Ref[List[Queue[String]]], 
 	jobProducer: JobProducer[String],
 	stockRepo: StockRepo, 
-	crawler: MinStockCrawler) extends UnitJobScheduler5(queueRef, jobProducer) {
+	crawler: MinStockCrawler,
+	crawlStatus: CrawlStatusRepo) extends UnitJobScheduler5(queueRef, jobProducer) {
 
-	override def unitProduce: ZIO[Any, Nothing, List[String]] = ???
+	override def unitProduce: ZIO[Any, Nothing, List[String]] = (for {
+		expiredItemCodes <- crawlStatus.getExpiredItemCode(10)
+		_ <- ZIO.log("Create target itemCodes : " + expiredItemCodes)
+	} yield expiredItemCodes)
+	.catchAll(e => ZIO.log(e.getMessage()) *> ZIO.succeed(List.empty[String]))
+	// .provide(
+	// 	CrawlStatusRepo.live,
+	// ).catchAll(e => ZIO.log(e.getMessage()) *> ZIO.succeed(List.empty[String]))
 
 	override def processJob(queue: Queue[String], workerId: Int = -1): ZIO[Any, Nothing, Unit] = 
 		(for {
@@ -109,13 +117,15 @@ object Main1 extends ZIOAppDefault {
 		queueRef <- Ref.make(List.empty[Queue[String]])
 		stockRepo <- ZIO.service[StockRepo]
 		crawler <- ZIO.service[MinStockCrawler]
+		crawlStatus <- ZIO.service[CrawlStatusRepo]
 		scheduler <- CrawlJobScheduler(
 			queueRef, 
 			new JobProducer[String] {
 				override def unitProduce = ZIO.succeed(List("068270", "205470", "005930"))
 			},
 			stockRepo,
-			crawler
+			crawler,
+			crawlStatus
 		).autoJobProduce
 	} yield ()
 	
@@ -127,6 +137,7 @@ object Main1 extends ZIOAppDefault {
 			DnsResolver.default,
 			DataDownloader.live,
 			MinStockCrawler.live,
+			CrawlStatusRepo.live,
 			StockRepo.live,
 			Quill.Mysql.fromNamingStrategy(SnakeCase),
 			Quill.DataSource.fromPrefix("StockMysqlAppConfig")
