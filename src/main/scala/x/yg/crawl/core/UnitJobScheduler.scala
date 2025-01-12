@@ -12,122 +12,122 @@ import zio.http.netty.NettyConfig
 import zio.http.netty.client.NettyClientDriver
 
 import java.util.concurrent.TimeUnit
+import x.yg.crawl.data.CrawlStatusRepo
 
-trait Job[T] {
-  def run: ZIO[Any, Throwable, T]
-}
-
-//TODO
-class StrJob(item: String) extends Job[String] {
-  // excute job : crawl and processing and then save to db
-  def run: ZIO[Any, Throwable, String] = 
-    ZIO.succeedBlocking{
-      println("-> run joblet proceessing : " + item + " at " + java.time.LocalDateTime.now)
-      "Succeed"
-    }
-}
-
-@deprecated
-class UnitJob extends Job[String] {
-    def run: ZIO[Any, Throwable, String] = 
-      ZIO.succeedBlocking{
-        println("->joblet proceessing : Hello World at " + java.time.LocalDateTime.now)
-        "Succeed"
-    }
-  }
 
 trait JobProducer[T] {
   def unitProduce: ZIO[Any, Nothing, List[T]]
 }
-//TODO
-class JobProducerImpl() extends JobProducer[String] {
-  // extract target items from db and then return list of items
-  def unitProduce: ZIO[Any, Nothing, List[String]] = (for {
-    cnt <- Random.nextIntBetween(0, 3)
-    res <- Random.nextIntBetween(0, 101)
-  } yield List.fill(cnt)("R-" + res))
-  
-  // .map { res =>
-  //   res.foreach(r => jobScheduler.addJob(new UnitJob))
-  //   res
-  // }
+
+class CrawlJobScheduler(
+	queueRef: Ref[List[Queue[String]]], 
+	stockRepo: StockRepo, 
+	crawler: MinStockCrawler,
+	crawlStatus: CrawlStatusRepo) extends UnitJobScheduler(queueRef) {
+
+	override def unitProduce: ZIO[Any, Nothing, List[String]] = (for {
+		expiredItemCodes <- crawlStatus.getExpiredItemCode(10)
+		_ <- ZIO.foreachPar(expiredItemCodes){itemCode => crawlStatus.syncCrawlStatus(itemCode, "PEND")}
+		_ <- ZIO.log("Create target itemCodes : " + expiredItemCodes)
+	} yield expiredItemCodes)
+	.catchAll(e => ZIO.log(e.getMessage()) *> ZIO.succeed(List.empty[String]))
+
+	override def processJob(queue: Queue[String], workerId: Int = -1): ZIO[Any, Nothing, Unit] = 
+		(for {
+			itemCode <- queue.take
+			cd <- crawler.crawl(itemCode)
+			res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
+			_ <- crawlStatus.syncCrawlStatus(itemCode, "SUSP")
+			_ <- ZIO.foreach(cd){r => Console.printLine(r.toString())}
+			_ <- Console.printLine(s"Inserted data ${cd.size} for $itemCode by worker #$workerId").ignore	// log
+		} yield ()).repeat(Schedule.spaced(1.seconds))
+		.provide(
+			Client.customized,
+			NettyClientDriver.live,
+			ZLayer.succeed(NettyConfig.default),
+			DnsResolver.default,
+			DataDownloader.live,
+		)
+		.unit.catchAll(e => ZIO.log(e.getMessage()).ignore)
 }
 
-@deprecated
-object UnitJobScheduler extends ZIOAppDefault {
-  // def runFunc: String = "Hello World at " + java.time.LocalDateTime.now
 
+abstract class UnitJobScheduler (
+	queueRef: Ref[List[Queue[String]]], 
+	queueSize: Int = 10) extends JobProducer[String] {
 
-  private def inputDataAndExtendQueue(queue: List[Queue[Job[String]]])(effect : => Job[String]): ZIO[Any, Nothing, Boolean] = 
-    for {
-      result <- ZIO.suspendSucceed {
-      queue match {
-        case Nil => ZIO.succeed(false)
-        case x :: xs => 
-          for {
-            result <- x.offer(effect)
-            res <- result match {
-              case true => ZIO.succeed(true)
-              case false => 
-                inputDataAndExtendQueue(xs)(effect)
-            }
-          } yield res
-        }
-     }
-    } yield result
-  
-  // public   
-  def autoProducer(queueRef: Ref[List[Queue[Job[String]]]]) = {
-    for {
-      queue <- queueRef.get
-      addRes <- inputDataAndExtendQueue(queue)(new UnitJob)
-      _ <- addRes match {
-        case true => ZIO.unit
-        case false => for {
-          _ <- Console.printLine("--> create new worker queue ... " + queue.size)
-          q <- Queue.dropping[Job[String]](3)
-          _ <- queueRef.update(_ :+ q)
-          _ <- unitQueueWorker(q, queue.size).fork
-        } yield ()
-      }
-    } yield ()
-  }
+	private def inputDataAndExtendQueue(queue: List[Queue[String]])(effect : => String): ZIO[Any, Nothing, Boolean] = 
+		for {
+			result <- ZIO.suspendSucceed {
+			queue match {
+				case Nil => ZIO.succeed(false)
+				case x :: xs => 
+					for {
+						result <- x.offer(effect)
+						res <- result match {
+							case true => ZIO.succeed(true)
+							case false => 
+								inputDataAndExtendQueue(xs)(effect)
+						}
+					} yield res
+				}
+			}
+		} yield result
+	
+	def processJob(queue: Queue[String], workerId: Int = -1): ZIO[Any, Nothing, Unit]
 
-  def addJob(queueRef: Ref[List[Queue[Job[String]]]], job: Job[String]) = 
-    for {
-      queue <- queueRef.get
-      addRes <- inputDataAndExtendQueue(queue)(job)
-      _ <- addRes match {
-        case true => ZIO.unit
-        case false => for {
-          _ <- Console.printLine("--> create new worker queue ... " + queue.size)
-          q <- Queue.dropping[Job[String]](3)
-          _ <- queueRef.update(_ :+ q)
-          _ <- unitQueueWorker(q, queue.size).fork
-        } yield ()
-      }
-    } yield ()
+	// add new job	
+	def addJob(job: String) = 
+		for {
+			queue <- queueRef.get
+			addRes <- inputDataAndExtendQueue(queue)(job)
+			_ <- addRes match {
+				case true => ZIO.unit
+				case false => for {
+					_ <- Console.printLine("--> create new worker queue ... " + queue.size)
+					q <- Queue.dropping[String](queueSize)
+					_ <- queueRef.update(_ :+ q)
+					_ <- processJob(q, queue.size).fork
+				} yield ()
+			}
+		} yield ()
+	
+	// produce continouse jobs
+	def startProduce() = {
+		(for {
+			data <- unitProduce	// ----------------> Producing Job
+			_ <- Console.printLine("produce job to crawl: " + data)
+			_ <- ZIO.foreach(data){r => addJob(r)}
+		} yield ()).repeat(Schedule.spaced(1.seconds)).unit  
+	}	
+}
 
-  private def unitQueueWorker(queue: Queue[Job[String]], workerId: Int = -1): ZIO[Any, Nothing, Unit] = 
-    (for {
-      job <- queue.take
-      res <- job.run.catchAll(e => ZIO.succeed(e.getMessage())) // 
-      _ <- Console.printLine(res + " by worker #" + workerId).ignore
-    } yield ()).repeat(Schedule.spaced(1.seconds)).unit  
-  
-  def streamProducer(queueRef: Ref[List[Queue[Job[String]]]]) = 
-    ZIO.foreach(1 to 30) { _ =>
-      for {
-        _ <- autoProducer(queueRef)
-        _ <- ZIO.sleep(Duration(500, TimeUnit.MILLISECONDS))
-      } yield ()
-    }
-
-  val app =  for {
-    queueRef <- Ref.make(List.empty[Queue[Job[String]]])
-    _ <- streamProducer(queueRef)
-    _ <- ZIO.succeed(println("process completed ..."))
-  } yield ()
-
-  def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = app.exitCode
+object Main1 extends ZIOAppDefault {
+	
+	val app = for {
+		queueRef <- Ref.make(List.empty[Queue[String]])
+		stockRepo <- ZIO.service[StockRepo]
+		crawler <- ZIO.service[MinStockCrawler]
+		crawlStatus <- ZIO.service[CrawlStatusRepo]
+		scheduler <- CrawlJobScheduler(
+			queueRef, 
+			stockRepo,
+			crawler,
+			crawlStatus
+		).startProduce()
+	} yield ()
+	
+	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
+		app.provide(
+			// Client.customized,
+			// NettyClientDriver.live,
+			// ZLayer.succeed(NettyConfig.default),
+			// DnsResolver.default,
+			DataDownloader.live,
+			MinStockCrawler.live,
+			CrawlStatusRepo.live,
+			StockRepo.live,
+			Quill.Mysql.fromNamingStrategy(SnakeCase),
+			Quill.DataSource.fromPrefix("StockMysqlAppConfig")
+		).exitCode	
 }

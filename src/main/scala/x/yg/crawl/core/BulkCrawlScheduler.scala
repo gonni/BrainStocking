@@ -20,7 +20,7 @@ object BulkCrawlScheduler extends ZIOAppDefault {
 
 	def crawlDayData(stockCode: String, targetDt: String = DataUtil.stockTimestamp()) = {
 		ZIO.collectAllDiscard(
-			(1 to 39).map { pageNo => 
+			(1 to 40).map { pageNo => 
 				(for {
 					crawler <- ZIO.service[MinStockCrawler]
 					cd <- crawler.crawl(stockCode, targetDt, pageNo)
