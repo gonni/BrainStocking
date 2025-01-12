@@ -13,7 +13,7 @@ trait EndPriceAnalyzer {
 
 class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
 
-  def analyzeUpstream(data: List[StockMinVolumeTable],  allowedError: Double = 0.2) = {
+  def analyzeUpstream(data: List[StockMinVolumeTable],  allowedError: Double = 0.25, innerErrorPer: Double = 0.80) = {
         
     val streamedData = ZStream.fromIterable(data).filter(r => {
         val tokens = r.tsCode.split("_")
@@ -24,23 +24,31 @@ class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
       firstElem <- streamedData.runHead
       lastElem <- streamedData.runLast
       // delta <- ZIO.attempt(lastElem.get.fixedPrice - firstElem.get.fixedPrice)
+      _ <- Console.printLine(s"First : ${firstElem}, end : ${lastElem}")
       delta <- ZIO.attempt(
         lastElem.flatMap(l => firstElem.map(f => l.fixedPrice - f.fixedPrice))
         .getOrElse(0.0)
         )
-      _ <- ZIO.when(delta < 0)(ZIO.fail(new Exception("Stock price is not trending upward")))
+      _ <- Console.printLine(s"Delta : ${delta}")
+      _ <- ZIO.when(delta < 0)(ZIO.fail(new Exception("---> Stock price is not trending upward <--")))
       slope <- ZIO.attempt(delta / (data.length - 1))
+      _ <- Console.printLine(s"Slope : ${slope}")
+
       result <- streamedData.zipWithIndex.runFold(0) { case (inCount, (element, idx)) =>
-        val expectedY = firstElem.map(a => a.fixedPrice - slope * idx) 
-        val error = expectedY.map(exp => Math.abs(element.fixedPrice - exp) / exp)
+        val expectedY = firstElem.map(a => a.fixedPrice + slope * idx) 
+        val error = expectedY.map(exp => Math.abs(element.fixedPrice - exp) / delta)
         error match {
-          case Some(e) if e <= allowedError => inCount + 1
-          case _ => inCount
+          case Some(e) if e <= allowedError => 
+            println("in Error => " + e + " <=≈ " + allowedError)
+            inCount + 1
+          case x => 
+            println("out Error => " + x)
+            inCount
         }
       }
       _ <- Console.printLine(s"Result : ${result} / ${data.length}")
-      finResult <- ZIO.succeed(result > data.length * 0.83)
-    } yield finResult).catchAll(e => ZIO.succeed(false))
+      finResult <- ZIO.succeed(result > data.length * innerErrorPer)
+    } yield finResult).catchAll(e => Console.printError(e.getLocalizedMessage()) *> ZIO.succeed(false))
     
   }
 
@@ -60,7 +68,7 @@ object RunnerMain extends ZIOAppDefault {
 
   val app = for {
     analyzer <- ZIO.service[EndPriceAnalyzer]
-    result <- analyzer.analyze("042700", "20241223")
+    result <- analyzer.analyze("000720", "20250110")
   } yield result
 
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 

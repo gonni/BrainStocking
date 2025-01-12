@@ -15,13 +15,14 @@ import zio.http.netty.client.NettyClientDriver
 import java.util.concurrent.TimeUnit
 import javax.xml.crypto.Data
 
-object BulkCrawlScheduler extends ZIOAppDefault {
+object DailyAllCrawler extends ZIOAppDefault {
 
 
 	def crawlDayData(stockCode: String, targetDt: String = DataUtil.stockTimestamp()) = {
 		ZIO.collectAllDiscard(
 			(1 to 40).map { pageNo => 
 				(for {
+					_ <- Console.printLine(s"Start crawlDayData ${stockCode} ${targetDt} -> ${pageNo}")
 					crawler <- ZIO.service[MinStockCrawler]
 					cd <- crawler.crawl(stockCode, targetDt, pageNo)
 					stockRepo <- ZIO.service[StockRepo]
@@ -33,7 +34,7 @@ object BulkCrawlScheduler extends ZIOAppDefault {
 	}
 
 	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-		crawlDayData("097230", DataUtil.stockTimestamp(0)).provide(
+		crawlDayData("000720", DataUtil.stockTimestamp(0)).provide(
 			Client.customized,
 			NettyClientDriver.live,
 			ZLayer.succeed(NettyConfig.default),
