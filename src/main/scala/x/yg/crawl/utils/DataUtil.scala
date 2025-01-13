@@ -22,15 +22,6 @@ object DataUtil {
     now.format(formatter)
   }
 
-  def stockTimestamp0(): String = {
-    val curTs = getCurrentTimestamp()
-    curTs.substring(0, 8) match {
-      case a if a > "161009" => curTs.substring(0, 8) + "161009"
-      case _ => curTs
-    }
-  }
-  //2024-11-19 16:10:49 --> 20241119161049  --> 20241127181614
-
   def stockTimestamp(dayOffset: Int = 0): String = {
     val now = LocalDateTime.now().plusDays(dayOffset)
     val formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss")
@@ -56,7 +47,7 @@ object DataUtil {
   def main(v: Array[String]) = {
     // println(convertNumTextToInt("1,000,000"))
     // println(getYYYYMMDD())
-    println(stockTimestamp()) //2024-11-27 16:10:09
+    println(getCurrentTimestamp() + " vs " + stockTimestamp()) //2024-11-27 16:10:09
     // 20241213161147
     // 20241213161049
   }

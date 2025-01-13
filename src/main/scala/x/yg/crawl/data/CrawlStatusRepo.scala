@@ -20,10 +20,18 @@ trait CrawlStatusRepo {
   def getCrawlStatus(itemCode: String) : ZIO[Any, Throwable, CrawlStatus]
   def getTargetToCrawl(statusCode: String): ZIO[Any, Throwable, List[String]]
   def getExpiredItemCode(min: Int): ZIO[Any, Throwable, List[String]]
+  def getExpiredItemCode(mSec: Long): ZIO[Any, Throwable, List[String]]
 }
 
 class CrawlStatusRepoImpl (quill: Quill.Mysql[SnakeCase]) extends CrawlStatusRepo {
   import quill._
+
+
+  override def getExpiredItemCode(mSec: Long): ZIO[Any, Throwable, List[String]] = 
+    run(
+      qryCrawlStatusTable
+        .filter(_.latestCrawlDt < lift(new Timestamp(java.lang.System.currentTimeMillis() - TimeUnit.MILLISECONDS.toMillis(mSec))))
+    ).map(_.map(_.itemCode))
 
   override def getExpiredItemCode(min: Int): ZIO[Any, Throwable, List[String]] = 
     run(

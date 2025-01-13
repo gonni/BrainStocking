@@ -13,6 +13,7 @@ import zio.http.netty.client.NettyClientDriver
 
 import java.util.concurrent.TimeUnit
 import x.yg.crawl.data.CrawlStatusRepo
+import x.yg.crawl.utils.DataUtil
 
 
 trait JobProducer[T] {
@@ -26,7 +27,14 @@ class CrawlJobScheduler(
 	crawlStatus: CrawlStatusRepo) extends UnitJobScheduler(queueRef) {
 
 	override def unitProduce: ZIO[Any, Nothing, List[String]] = (for {
-		expiredItemCodes <- crawlStatus.getExpiredItemCode(10)
+		_ <- ZIO.when(DataUtil.getCurrentTimestamp() != DataUtil.stockTimestamp(0))(
+			ZIO.log("Out of stockTime") *> ZIO.fail(new Exception("---> Out of stock time of Today")))
+		queue <- queueRef.get
+		cntEndItemCodes <- queue.lastOption match {
+			case Some(q) => q.size
+			case None => ZIO.succeed(0)
+		}	
+		expiredItemCodes <- crawlStatus.getExpiredItemCode(10 * 60 * 1000 - cntEndItemCodes * 1000)
 		_ <- ZIO.foreachPar(expiredItemCodes){itemCode => crawlStatus.syncCrawlStatus(itemCode, "PEND")}
 		_ <- ZIO.log("Create target itemCodes : " + expiredItemCodes)
 	} yield expiredItemCodes)
