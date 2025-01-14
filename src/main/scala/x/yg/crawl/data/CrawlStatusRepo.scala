@@ -19,7 +19,7 @@ trait CrawlStatusRepo {
   def syncCrawlStatus(itemCode: String, crawlStatus: String): ZIO[Any, Throwable, Long]
   def getCrawlStatus(itemCode: String) : ZIO[Any, Throwable, CrawlStatus]
   def getTargetToCrawl(statusCode: String): ZIO[Any, Throwable, List[String]]
-  def getExpiredItemCode(min: Int): ZIO[Any, Throwable, List[String]]
+  // def getExpiredItemCode(min: Int): ZIO[Any, Throwable, List[String]]
   def getExpiredItemCode(mSec: Long): ZIO[Any, Throwable, List[String]]
 }
 
@@ -33,11 +33,11 @@ class CrawlStatusRepoImpl (quill: Quill.Mysql[SnakeCase]) extends CrawlStatusRep
         .filter(_.latestCrawlDt < lift(new Timestamp(java.lang.System.currentTimeMillis() - TimeUnit.MILLISECONDS.toMillis(mSec))))
     ).map(_.map(_.itemCode))
 
-  override def getExpiredItemCode(min: Int): ZIO[Any, Throwable, List[String]] = 
-    run(
-      qryCrawlStatusTable
-        .filter(_.latestCrawlDt < lift(new Timestamp(java.lang.System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(min))))
-    ).map(_.map(_.itemCode))
+  // override def getExpiredItemCode(min: Int): ZIO[Any, Throwable, List[String]] = 
+  //   run(
+  //     qryCrawlStatusTable
+  //       .filter(_.latestCrawlDt < lift(new Timestamp(java.lang.System.currentTimeMillis() - TimeUnit.MINUTES.toMillis(min))))
+  //   ).map(_.map(_.itemCode))
 
   private inline def qryCrawlStatusTable = quote(querySchema[CrawlStatus](entity = "STOCK_CRAWL_STATUS"))
 
@@ -57,7 +57,11 @@ class CrawlStatusRepoImpl (quill: Quill.Mysql[SnakeCase]) extends CrawlStatusRep
         }
     } yield result)
 
-  override def getTargetToCrawl(statusCode: String): ZIO[Any, Throwable, List[String]] = ???
+  override def getTargetToCrawl(statusCode: String): ZIO[Any, Throwable, List[String]] = 
+    run(
+      qryCrawlStatusTable
+        .filter(_.statusCode == lift(statusCode))
+    ).map(_.map(_.itemCode))
 
   override def getCrawlStatus(itemCode: String): ZIO[Any, Throwable, CrawlStatus] = 
     run(

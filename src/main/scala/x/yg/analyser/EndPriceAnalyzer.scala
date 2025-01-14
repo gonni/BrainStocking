@@ -8,7 +8,7 @@ import zio.*
 import zio.stream.*
 
 trait EndPriceAnalyzer {
-  def analyze(stockCode: String, targetDt: String = "20210801"): ZIO[StockRepo, Throwable, Any]
+  def analyze(stockCode: String, targetDt: String = "20210801"): ZIO[StockRepo, Throwable, Boolean]
 } 
 
 class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
