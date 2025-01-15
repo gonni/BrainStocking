@@ -14,11 +14,14 @@ import zio.http.netty.client.NettyClientDriver
 
 import java.util.concurrent.TimeUnit
 import javax.xml.crypto.Data
+import org.scalafmt.config.Docstrings.BlankFirstLine.yes
+import x.yg.crawl.data.CrawlStatusRepo
 
 object DailyAllCrawler extends ZIOAppDefault {
 
 
-	def crawlDayData(stockCode: String, targetDt: String = DataUtil.stockTimestamp()) = {
+	def crawlDayData(stockCode: String, targetDt: String = DataUtil.stockTimestamp()): 
+		ZIO[ZClient[Any, Scope, Body, Throwable, Response] & DataDownloader & (MinStockCrawler & StockRepo), Nothing, Unit] = {
 		ZIO.collectAllDiscard(
 			(1 to 40).map { pageNo => 
 				(for {
@@ -33,14 +36,24 @@ object DailyAllCrawler extends ZIOAppDefault {
 		) *> ZIO.log(s"crawl daily data of $stockCode done ..")
 	}
 
+	val app = for {
+		crawlStatus <- ZIO.service[CrawlStatusRepo]
+		targetSeeds <- crawlStatus.getTargetToCrawl("ACTV")
+		_ <- ZIO.foreach(targetSeeds)(stockCode => 
+			Console.printLine(s"targetStockCode : $stockCode") *> crawlDayData(stockCode, DataUtil.stockTimestamp(0)))
+	} yield ()
+
 	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-		crawlDayData("000720", DataUtil.stockTimestamp(0)).provide(
+		// crawlDayData("000720", DataUtil.stockTimestamp(0))
+		app
+		.provide(
 			Client.customized,
 			NettyClientDriver.live,
 			ZLayer.succeed(NettyConfig.default),
 			DnsResolver.default,
 			DataDownloader.live,
 			MinStockCrawler.live,
+			CrawlStatusRepo.live,
 			StockRepo.live,
 			Quill.Mysql.fromNamingStrategy(SnakeCase),
 			Quill.DataSource.fromPrefix("StockMysqlAppConfig")

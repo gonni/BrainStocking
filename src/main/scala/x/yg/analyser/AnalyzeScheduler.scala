@@ -13,7 +13,7 @@ object AnalyzeScheduler extends ZIOAppDefault {
   def analyzeAll(targetDt: String = DataUtil.getYYYYMMDD(0)) = for {
     crawlStatus <- ZIO.service[CrawlStatusRepo]
     analyzer <- ZIO.service[EndPriceAnalyzer]
-    targetItmCodes <- crawlStatus.getTargetToCrawl("SUSP")
+    targetItmCodes <- crawlStatus.getTargetToCrawl("ACTV")
     res <- ZIO.foreachPar(targetItmCodes)(itemCode => analyzer.analyze(itemCode, targetDt))
   } yield targetItmCodes.zip(res)
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 

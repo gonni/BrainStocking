@@ -1,2 +1,2 @@
 - job processing should stop in not business days
-- TBD
+- verify if price is upwarded next day
