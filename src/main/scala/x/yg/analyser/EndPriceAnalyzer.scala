@@ -30,7 +30,7 @@ class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
         .getOrElse(0.0)
         )
       _ <- Console.printLine(s"Delta : ${delta}")
-      _ <- ZIO.when(delta < 0)(ZIO.fail(new Exception("---> Stock price is not trending upward <--")))
+      _ <- ZIO.when(delta <= 0.0)(ZIO.fail(new Exception("---> Stock price is not trending upward <--")))
       slope <- ZIO.attempt(delta / (data.length - 1))
       _ <- Console.printLine(s"Slope : ${slope}")
 

@@ -62,7 +62,7 @@ class CrawlJobScheduler(
 
 abstract class UnitJobScheduler (
 	queueRef: Ref[List[Queue[String]]], 
-	queueSize: Int = 10) extends JobProducer[String] {
+	queueSize: Int = 60) extends JobProducer[String] {
 
 	private def inputDataAndExtendQueue(queue: List[Queue[String]])(effect : => String): ZIO[Any, Nothing, Boolean] = 
 		for {
