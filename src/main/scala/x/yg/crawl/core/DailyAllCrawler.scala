@@ -36,16 +36,17 @@ object DailyAllCrawler extends ZIOAppDefault {
 		) *> ZIO.log(s"crawl daily data of $stockCode done ..")
 	}
 
-	val app = for {
+	val app = (offset: Int) => for {
 		crawlStatus <- ZIO.service[CrawlStatusRepo]
 		targetSeeds <- crawlStatus.getTargetToCrawl("ACTV")
 		_ <- ZIO.foreach(targetSeeds)(stockCode => 
-			Console.printLine(s"targetStockCode : $stockCode") *> crawlDayData(stockCode, DataUtil.stockTimestamp(0)))
+			Console.printLine(s"targetStockCode : $stockCode") 
+			*> crawlDayData(stockCode, "20250115161049"))//DataUtil.stockTimestamp(offset)))
 	} yield ()
 
 	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
 		// crawlDayData("000720", DataUtil.stockTimestamp(0))
-		app
+		app(-1)
 		.provide(
 			Client.customized,
 			NettyClientDriver.live,

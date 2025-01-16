@@ -16,8 +16,9 @@ object AnalyzeScheduler extends ZIOAppDefault {
     targetItmCodes <- crawlStatus.getTargetToCrawl("ACTV")
     res <- ZIO.foreachPar(targetItmCodes)(itemCode => analyzer.analyze(itemCode, targetDt))
   } yield targetItmCodes.zip(res)
+  
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-    analyzeAll()
+    analyzeAll(DataUtil.getYYYYMMDD(-1))
     .provide(
       CrawlStatusRepo.live,
       EndPriceAnalyzer.live,
