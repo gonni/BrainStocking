@@ -10,7 +10,7 @@ import io.getquill.jdbczio.Quill
 
 object AnalyzeScheduler extends ZIOAppDefault {
 
-  def analyzeAll(targetDt: String = DataUtil.getYYYYMMDD(0)) = for {
+  def analyzeToday(targetDt: String = DataUtil.getYYYYMMDD(0)) = for {
     crawlStatus <- ZIO.service[CrawlStatusRepo]
     analyzer <- ZIO.service[EndPriceAnalyzer]
     targetItmCodes <- crawlStatus.getTargetToCrawl("ACTV")
@@ -18,7 +18,7 @@ object AnalyzeScheduler extends ZIOAppDefault {
   } yield targetItmCodes.zip(res)
   
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-    analyzeAll(DataUtil.getYYYYMMDD(-1))
+    analyzeToday(DataUtil.getYYYYMMDD(0))
     .provide(
       CrawlStatusRepo.live,
       EndPriceAnalyzer.live,

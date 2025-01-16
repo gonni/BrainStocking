@@ -7,12 +7,17 @@ object DataUtil {
     // 1,000,000 -> 1000000
     text.replaceAll(",", "").toInt
   }
-
+  /**
+    * Get YYYYMMDD format date
+    *
+    * @param offset
+    * @return YYYYMMDD format date
+    */
   def getYYYYMMDD(offset: Int = 0): String = {
     import java.time.LocalDate
     val today = LocalDate.now
     val target = today.minusDays(offset)
-    target.toString
+    target.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
   }
 
   //2024-11-19 16:10:49
@@ -50,5 +55,6 @@ object DataUtil {
     println(getCurrentTimestamp() + " vs " + stockTimestamp()) //2024-11-27 16:10:09
     // 20241213161147
     // 20241213161049
+    println(getYYYYMMDD())
   }
 }

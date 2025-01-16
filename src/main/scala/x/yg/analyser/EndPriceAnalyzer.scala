@@ -39,15 +39,15 @@ class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
         val error = expectedY.map(exp => Math.abs(element.fixedPrice - exp) / delta)
         error match {
           case Some(e) if e <= allowedError => 
-            println("in Error => " + e + " <=≈ " + allowedError)
+            // println("in Error => " + e + " <=≈ " + allowedError)
             inCount + 1
           case x => 
-            println("out Error => " + x)
+            // println("out Error => " + x)
             inCount
         }
       }
       _ <- Console.printLine(s"Result : ${result} / ${data.length}")
-      finResult <- ZIO.succeed((result > data.length * innerErrorPer, (result / data.length).toFloat))
+      finResult <- ZIO.succeed((result > data.length * innerErrorPer, (result.toFloat / data.length).toFloat))
     } yield finResult).catchAll(e => 
       Console.printError(e.getLocalizedMessage()) 
       *> ZIO.succeed((false, 0.0f))
@@ -71,7 +71,7 @@ object RunnerMain extends ZIOAppDefault {
 
   val app = for {
     analyzer <- ZIO.service[EndPriceAnalyzer]
-    result <- analyzer.analyze("005880", "20250115")
+    result <- analyzer.analyze("000720", "20250116")
   } yield result
 
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
