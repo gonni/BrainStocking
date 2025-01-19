@@ -12,8 +12,8 @@ trait EndPriceAnalyzer {
 } 
 
 class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
-
-  def analyzeUpstream(data: List[StockMinVolumeTable],  allowedError: Double = 0.25, innerErrorPer: Double = 0.80) = {
+  // 0.80 innerErrorPer is valid
+  def analyzeUpstream(data: List[StockMinVolumeTable],  allowedError: Double = 0.25, innerErrorPer: Double = 0.40) = {
         
     val streamedData = ZStream.fromIterable(data).filter(r => {
         val tokens = r.tsCode.split("_")
@@ -71,7 +71,7 @@ object RunnerMain extends ZIOAppDefault {
 
   val app = for {
     analyzer <- ZIO.service[EndPriceAnalyzer]
-    result <- analyzer.analyze("000720", "20250116")
+    result <- analyzer.analyze("000720", "20250117")
   } yield result
 
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 

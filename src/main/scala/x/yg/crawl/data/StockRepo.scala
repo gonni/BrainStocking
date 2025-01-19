@@ -24,6 +24,7 @@ object StockItem:
 trait StockRepo {
   def selectStockItemsAll(): ZIO[Any, Throwable, List[StockItem]]
   def selectStockDataByItemCode(itemCode: String, targetDay: String): ZIO[Any, Throwable, List[StockMinVolumeTable]]
+  def selectStockDataByItemCode(itemCode: String, targetDay: String, underTs: String): ZIO[Any, Throwable, List[StockMinVolumeTable]]
   // ---
   def insertStockMinVolume(stockMinVolume: StockMinVolumeTable): ZIO[Any, Throwable, Long]
   def insertStockMinVolumeBulk(stockMinVolume: List[StockMinVolumeTable]): ZIO[Any, Throwable, List[Long]]
@@ -34,8 +35,24 @@ trait StockRepo {
 class StockRepoImpl(quill: Quill.Mysql[SnakeCase]) extends StockRepo {
 
   import quill._
+
   private inline def qryStockMinVolumeTable = quote(querySchema[StockMinVolumeTable](entity = "STOCK_MIN_VOLUME"))
   private inline def qryStockItemsTable = quote(querySchema[StockItem](entity = "STOCK_ITEMS"))
+
+
+  override def selectStockDataByItemCode(itemCode: String, targetDay: String, underTs: String)
+    : ZIO[Any, Throwable, List[StockMinVolumeTable]] =  {
+      val targetDts = targetDay + "_" + underTs
+      run{
+        sql"""
+          SELECT * FROM STOCK_MIN_VOLUME
+          WHERE ITEM_CODE = ${lift(itemCode)} 
+            AND TS_CODE LIKE ${lift(s"$targetDay%")} 
+            AND TS_CODE <= ${lift(targetDts)} 
+          ORDER BY TS_CODE
+        """.as[Query[StockMinVolumeTable]]
+      }
+    }
 
   override def selectStockItemsAll(): ZIO[Any, Throwable, List[StockItem]] = 
     run(
@@ -75,4 +92,20 @@ class StockRepoImpl(quill: Quill.Mysql[SnakeCase]) extends StockRepo {
 object StockRepo {
   val live: ZLayer[Quill.Mysql[SnakeCase], Nothing, StockRepo] = 
     ZLayer.fromFunction (new StockRepoImpl(_))
+}
+
+object StockRepoMain extends ZIOAppDefault {
+
+  val app = for {
+    stockRepo <- ZIO.service[StockRepo]
+    stockItems <- stockRepo.selectStockDataByItemCode("000720", "20250115", "09:05")
+    _ <- ZIO.foreach(stockItems)(e => Console.printLine(e.toString))
+  } yield ()
+
+  override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = app
+    .provide(
+      Quill.Mysql.fromNamingStrategy(SnakeCase),
+      Quill.DataSource.fromPrefix("StockMysqlAppConfig"),
+      StockRepo.live
+    ).debug
 }

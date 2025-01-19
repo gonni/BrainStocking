@@ -6,7 +6,7 @@ import io.getquill.jdbczio.Quill
 import io.getquill.*
 import java.sql.Timestamp
 import java.util.concurrent.TimeUnit
-  import io.getquill.extras.SqlTimestampOps
+import io.getquill.extras.SqlTimestampOps
 
 
 case class CrawlStatus(

@@ -16,8 +16,14 @@ object DataUtil {
   def getYYYYMMDD(offset: Int = 0): String = {
     import java.time.LocalDate
     val today = LocalDate.now
-    val target = today.minusDays(offset)
+    val target = today.minusDays(-offset)
     target.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
+  }
+
+  def getByYYYYMMDD(targetYYYYMMDD: String, offset: Int = 0): String = {
+    import java.time.LocalDate
+    val target = LocalDate.parse(targetYYYYMMDD, DateTimeFormatter.ofPattern("yyyyMMdd"))
+    target.plusDays(offset).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
   }
 
   //2024-11-19 16:10:49
@@ -56,5 +62,6 @@ object DataUtil {
     // 20241213161147
     // 20241213161049
     println(getYYYYMMDD())
+    println(getByYYYYMMDD(getYYYYMMDD(), -1))
   }
 }
