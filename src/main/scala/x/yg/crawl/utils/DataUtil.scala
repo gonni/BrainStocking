@@ -1,6 +1,7 @@
 package x.yg.crawl.utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.{DayOfWeek, LocalDate}
 
 object DataUtil {
   def convertNumTextToInt(text: String): Int = {
@@ -25,6 +26,23 @@ object DataUtil {
     val target = LocalDate.parse(targetYYYYMMDD, DateTimeFormatter.ofPattern("yyyyMMdd"))
     target.plusDays(offset).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
   }
+  
+  def getByStockYYYYMMDD(targetYYYYMMDD: String, offset: Int = 0): String = {
+  val dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+
+  def adjustToValidDate(date: LocalDate): LocalDate = {
+    val dayOfWeek = date.getDayOfWeek
+    if (dayOfWeek == DayOfWeek.SATURDAY) date.minusDays(1)
+    else if (dayOfWeek == DayOfWeek.SUNDAY) date.minusDays(2)
+    else date
+  }
+
+  val target = LocalDate.parse(targetYYYYMMDD, dateFormatter)
+  val adjustedTarget = target.plusDays(offset)
+  val validDate = adjustToValidDate(adjustedTarget)
+
+  validDate.format(dateFormatter)
+}
 
   //2024-11-19 16:10:49
   def getCurrentTimestamp(): String = {
@@ -63,5 +81,6 @@ object DataUtil {
     // 20241213161049
     println(getYYYYMMDD())
     println(getByYYYYMMDD(getYYYYMMDD(), -1))
+    println(getByStockYYYYMMDD(getYYYYMMDD(), -1))
   }
 }
