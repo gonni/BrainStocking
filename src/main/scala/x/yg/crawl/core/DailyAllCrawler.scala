@@ -46,7 +46,7 @@ object DailyAllCrawler extends ZIOAppDefault {
 
 	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
 		// crawlDayData("000720", DataUtil.stockTimestamp(0))
-		app(-1)
+		app(-7)
 		.provide(
 			Client.customized,
 			NettyClientDriver.live,

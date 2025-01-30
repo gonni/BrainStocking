@@ -11,17 +11,19 @@ trait DayVaildator {
 }
 
 class DayVaildatorImpl(stockRepo: StockRepo, endPriceResultRepo: EndPriceResultRepo) extends DayVaildator {
-  override def validateNextDayHighIn5min(itemCode: String, targetYYYYMMDD: String): ZIO[Any, Throwable, Unit] = 
+  override def validateNextDayHighIn5min(itemCode: String, 
+    targetYYYYMMDD: String = DataUtil.getYYYYMMDD()): ZIO[Any, Throwable, Unit] = 
     for {
       endPriceResult <- endPriceResultRepo.getEndPriceReuslt(itemCode, DataUtil.getByYYYYMMDD(targetYYYYMMDD, -1))
       _ <- endPriceResult match {
         case Some(epr) => 
           for {
             stockData <- stockRepo.selectStockDataByItemCode(itemCode, targetYYYYMMDD, "09:10").map(_.map(_.fixedPrice))
+            _ <- Console.printLine(s"---- stockData : ${stockData}")
             // get D-1 end price, and compare with D(09:10) max price 
           } yield ()
           
-        case None => ZIO.succeed(())
+        case None => Console.printLine("No Data") *> ZIO.succeed(())
       }
       // _ <- endPriceResult match {
       //   case Some(endPriceResult) => 

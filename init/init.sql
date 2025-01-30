@@ -33,7 +33,7 @@ CREATE TABLE `stock_crawl_status` (
   PRIMARY KEY (`item_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
+-- Deprecated
 create table STOCK_END_PRICE_ANALYZE_RESULT (
 	TARGET_DT varchar(8) not null,
 	ITEM_CODE varchar(12) not null,
@@ -42,6 +42,18 @@ create table STOCK_END_PRICE_ANALYZE_RESULT (
 	NEXTDAY_HIGH int,
 	AFTERDAY_HIGH_5D int,
 	LATEST_OUT_DT timestamp,
+	MEMO varchar(256),
+	primary key (TARGET_DT, ITEM_CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ;
+
+--
+create table STOCK_END_PRICE_ANALYZE_RESULT (
+	TARGET_DT varchar(8) not null,
+	ITEM_CODE varchar(12) not null,
+	MATCH_SCORE float not null,
+	NEXT_DAY_HIGH5M int,
+	AFTER_DAY_HIGH5D int,
+	UPD_DT timestamp,
 	MEMO varchar(256),
 	primary key (TARGET_DT, ITEM_CODE)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ;

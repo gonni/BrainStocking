@@ -35,7 +35,7 @@ object AnalyzeScheduler extends ZIOAppDefault {
   } yield cntValid // targetItmCodes.zip(res)
   
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-    analyzeToday(DataUtil.getYYYYMMDD(-3))
+    analyzeToday("20250122") //DataUtil.getYYYYMMDD(-5))
     .provide(
       CrawlStatusRepo.live,
       EndPriceResultRepo.live,
