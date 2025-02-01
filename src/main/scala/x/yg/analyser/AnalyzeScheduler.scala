@@ -22,9 +22,9 @@ object AnalyzeScheduler extends ZIOAppDefault {
       for {
         res <- analyzer.analyze(itemCode, targetDt)
         r <- res match {
-          case (true, scroe) => 
+          case (true, scroe, basePrice) => 
             Console.printLine(s"insert data : ${itemCode} ${targetDt} ${scroe}") *>
-            endPriceResult.upsertEndPriceResult(EndPriceResult(targetDt, itemCode, scroe)) *>
+            endPriceResult.upsertEndPriceResult(EndPriceResult(targetDt, itemCode, scroe, basePrice)) *>
             ZIO.succeed(acc + 1)
           case _ => 
             println(s"ignored data : ${itemCode} ${targetDt}")

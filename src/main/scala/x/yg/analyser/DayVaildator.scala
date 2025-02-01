@@ -10,38 +10,30 @@ trait DayVaildator {
   def validateAfterDayHighIn5days(day: String): ZIO[Any, Throwable, Unit]
 }
 
+// "000720", "20250123"  --> baseDay : 20250122
 class DayVaildatorImpl(stockRepo: StockRepo, endPriceResultRepo: EndPriceResultRepo) extends DayVaildator {
-  override def validateNextDayHighIn5min(itemCode: String, 
+  override def validateNextDayHighIn5min(
+    itemCode: String, 
     targetYYYYMMDD: String = DataUtil.getYYYYMMDD()): ZIO[Any, Throwable, Unit] = 
     for {
       endPriceResult <- endPriceResultRepo.getEndPriceReuslt(itemCode, DataUtil.getByYYYYMMDD(targetYYYYMMDD, -1))
       _ <- endPriceResult match {
         case Some(epr) => 
           for {
-            stockData <- stockRepo.selectStockDataByItemCode(itemCode, targetYYYYMMDD, "09:10").map(_.map(_.fixedPrice))
-            _ <- Console.printLine(s"---- stockData : ${stockData}")
-            // get D-1 end price, and compare with D(09:10) max price 
+            yDayBasePrice <- stockRepo.selectOneStockDataByItemCode(itemCode, DataUtil.getByStockYYYYMMDD(targetYYYYMMDD, -1) + "_15:10")
+              .map(_.map(_.fixedPrice))
+            _ <- yDayBasePrice match {
+              case Some(endPrice) => for {
+                curIn10min <- stockRepo.selectStockDataByItemCode(itemCode, targetYYYYMMDD, "09:10").map(_.map(_.fixedPrice))
+                _ <- Console.printLine(s"---- yDayPrice : ${yDayBasePrice}")
+                _ <- Console.printLine(s"---- stockData : ${curIn10min.max}")
+                res <- endPriceResultRepo.updateNextDayHigh5m(itemCode,  DataUtil.getByYYYYMMDD(targetYYYYMMDD, -1), curIn10min.max.toInt)
+              } yield res
+              case None => ZIO.succeed(0)
+            }
           } yield ()
-          
-        case None => Console.printLine("No Data") *> ZIO.succeed(())
+        case None => Console.printLine("No Data") *> ZIO.succeed((-1))
       }
-      // _ <- endPriceResult match {
-      //   case Some(endPriceResult) => 
-      //     for {
-      //       stockData <- stockRepo.getStockData(itemCode, targetYYYYMMDD)
-      //       _ <- stockData match {
-      //         case Some(stockData) => 
-      //           if (stockData.highPrice > 0) {
-      //             endPriceResultRepo.updateNextDayHigh5m(itemCode, stockData.highPrice)
-      //           } else {
-      //             ZIO.succeed(())
-      //           }
-      //         case None => ZIO.succeed(())
-      //       }
-      //     } yield ()
-          
-      //   case None => ZIO.succeed(())
-      // }
     } yield ()
 
 

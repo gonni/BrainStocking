@@ -7,13 +7,16 @@ import io.getquill.jdbczio.Quill
 import io.getquill.*
 import java.sql.Timestamp
 import java.util.concurrent.TimeUnit
+// import io.getquill.autoQuote
+import sourcecode.Text.generate
 
 
 // STOCK_END_PRICE_ANALYZE_RESULT
 case class EndPriceResult(
     targetDt: String,
     itemCode: String,
-    matchScore: Float,
+    matchScore: Float = 0.0f,
+    basePrice: Int = 0,
     nextDayHigh5m: Int = 0,
     afterDayHigh5d: Int = 0,
     updDt: Timestamp = new Timestamp(java.lang.System.currentTimeMillis()),
@@ -24,12 +27,14 @@ trait EndPriceResultRepo {
   def getEndPriceReuslt(itemCode: String, targetDt: String): ZIO[Any, Throwable, Option[EndPriceResult]]
   def upsertEndPriceResult(endPriceResult: EndPriceResult): ZIO[Any, Throwable, Long]
   def insertEndPriceResult(endPriceResult: EndPriceResult): ZIO[Any, Throwable, Long]
-  def updateNextDayHigh5m(itemCode: String, nextDayHigh5m: Int): ZIO[Any, Throwable, Long]
-  def updateAfterDayHigh5d(itemCode: String, nextDayHigh5d: Int): ZIO[Any, Throwable, Long]
+  def updateNextDayHigh5m(itemCode: String, targetDt: String, nextDayHigh5m: Int): ZIO[Any, Throwable, Long]
+  def updateAfterDayHigh5d(itemCode: String, targetDt: String, nextDayHigh5d: Int): ZIO[Any, Throwable, Long]
 }
 
 class EndPriceResultRepoImpl (quill: Quill.Mysql[SnakeCase]) extends EndPriceResultRepo {
   import quill._
+
+  private inline def qryEndPriceResultTable = quote(querySchema[EndPriceResult](entity = "STOCK_END_PRICE_ANALYZE_RESULT"))
 
   override def getEndPriceReuslt(itemCode: String, targetDt: String): ZIO[Any, Throwable, Option[EndPriceResult]] = 
     run(
@@ -38,46 +43,64 @@ class EndPriceResultRepoImpl (quill: Quill.Mysql[SnakeCase]) extends EndPriceRes
         .filter(_.targetDt == lift(targetDt))
     ).map(_.headOption)
 
-  private inline def qryEndPriceResultTable = quote(querySchema[EndPriceResult](entity = "STOCK_END_PRICE_ANALYZE_RESULT"))
-
-  override def upsertEndPriceResult(endPriceResult: EndPriceResult): ZIO[Any, Throwable, Long] = 
+  override def upsertEndPriceResult(endPriceResult: EndPriceResult): ZIO[Any, Throwable, Long] = {
     transaction(for {
-      updateCount <- run(
-        qryEndPriceResultTable
-          .filter(_.itemCode == lift(endPriceResult.itemCode))
-          .filter(_.targetDt == lift(endPriceResult.targetDt))
-          .update(
-            _.matchScore -> lift(endPriceResult.matchScore),
-            _.nextDayHigh5m -> lift(endPriceResult.nextDayHigh5m),
-            _.afterDayHigh5d -> lift(endPriceResult.afterDayHigh5d),
-            _.updDt -> lift(new Timestamp(java.lang.System.currentTimeMillis())),
-            _.memo -> lift(endPriceResult.memo)
-          )
-      )
+      updateCount <- executeUpdate(endPriceResult)
       result <- updateCount match {
-        case 0 => run(
-          qryEndPriceResultTable.insertValue(lift(endPriceResult))
-        )
+        case 0 => run(qryEndPriceResultTable.insertValue(lift(endPriceResult)))
         case _ => ZIO.succeed(updateCount)
       }
     } yield result)
+  }
+
+  def executeUpdate(endPriceResult: EndPriceResult): ZIO[Any, Throwable, Long] = {
+    val baseQuery = new StringBuilder(
+      s"UPDATE STOCK_END_PRICE_ANALYZE_RESULT SET upd_dt = '${endPriceResult.updDt}', memo = '${sanitize(endPriceResult.memo)}'"
+    )
+
+    if (endPriceResult.matchScore != 0.0f) {
+      baseQuery.append(s", match_score = ${endPriceResult.matchScore}")
+    }
+    if (endPriceResult.basePrice != 0) {
+      baseQuery.append(s", base_price = ${endPriceResult.basePrice}")
+    }
+    if (endPriceResult.nextDayHigh5m != 0) {
+      baseQuery.append(s", next_day_high5m = ${endPriceResult.nextDayHigh5m}")
+    }
+    if (endPriceResult.afterDayHigh5d != 0) {
+      baseQuery.append(s", after_day_high5d = ${endPriceResult.afterDayHigh5d}")
+    }
+
+    baseQuery.append(s" WHERE item_code = '${sanitize(endPriceResult.itemCode)}' AND target_dt = '${endPriceResult.targetDt}'")
+
+    val sqlString = baseQuery.toString()
+    println(s"Executing SQL: $sqlString")
+
+    quill.run(quote({sql"""#$sqlString""".as[Action[Long]]}))
+  }
+
+  def sanitize(value: String): String = {
+    value.replaceAll("'", "''")
+  }
 
   override def insertEndPriceResult(endPriceResult: EndPriceResult): ZIO[Any, Throwable, Long] = 
     run(
       qryEndPriceResultTable.insertValue(lift(endPriceResult))
     )
   
-  override def updateNextDayHigh5m(itemCode: String, nextDayHigh5m: Int): ZIO[Any, Throwable, Long] = 
+  override def updateNextDayHigh5m(itemCode: String, targetDt: String, nextDayHigh5m: Int): ZIO[Any, Throwable, Long] = 
     run(
       qryEndPriceResultTable
         .filter(_.itemCode == lift(itemCode))
+        .filter(_.targetDt == lift(targetDt))
         .update(_.nextDayHigh5m -> lift(nextDayHigh5m))
     )
 
-  override def updateAfterDayHigh5d(itemCode: String, nextDayHigh5d: Int): ZIO[Any, Throwable, Long] = 
+  override def updateAfterDayHigh5d(itemCode: String, targetDt: String, nextDayHigh5d: Int): ZIO[Any, Throwable, Long] = 
     run(
       qryEndPriceResultTable
         .filter(_.itemCode == lift(itemCode))
+        .filter(_.targetDt == lift(targetDt))
         .update(_.afterDayHigh5d -> lift(nextDayHigh5d))
     )
 }

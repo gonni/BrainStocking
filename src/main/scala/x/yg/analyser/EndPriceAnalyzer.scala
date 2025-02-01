@@ -8,7 +8,7 @@ import zio.*
 import zio.stream.*
 
 trait EndPriceAnalyzer {
-  def analyze(stockCode: String, targetDt: String = "20210801"): ZIO[StockRepo, Throwable, (Boolean, Float)]
+  def analyze(stockCode: String, targetDt: String = "20210801"): ZIO[StockRepo, Throwable, (Boolean, Float, Int)]
 } 
 
 class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
@@ -47,10 +47,10 @@ class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
         }
       }
       _ <- Console.printLine(s"Result : ${result} / ${data.length}")
-      finResult <- ZIO.succeed((result > data.length * innerErrorPer, (result.toFloat / data.length).toFloat))
+      finResult <- ZIO.succeed((result > data.length * innerErrorPer, (result.toFloat / data.length).toFloat, lastElem.get.fixedPrice.toInt))
     } yield finResult).catchAll(e => 
       Console.printError(e.getLocalizedMessage()) 
-      *> ZIO.succeed((false, 0.0f))
+      *> ZIO.succeed((false, 0.0f, -1))
       )
     
   }

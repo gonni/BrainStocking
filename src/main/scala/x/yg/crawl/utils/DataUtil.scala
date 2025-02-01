@@ -27,22 +27,22 @@ object DataUtil {
     target.plusDays(offset).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
   }
   
-  def getByStockYYYYMMDD(targetYYYYMMDD: String, offset: Int = 0): String = {
-  val dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
+  def getByStockYYYYMMDD(targetYYYYMMDD: String = getYYYYMMDD(0), offset: Int = 0): String = {
+    val dateFormatter = DateTimeFormatter.ofPattern("yyyyMMdd")
 
-  def adjustToValidDate(date: LocalDate): LocalDate = {
-    val dayOfWeek = date.getDayOfWeek
-    if (dayOfWeek == DayOfWeek.SATURDAY) date.minusDays(1)
-    else if (dayOfWeek == DayOfWeek.SUNDAY) date.minusDays(2)
-    else date
+    def adjustToValidDate(date: LocalDate): LocalDate = {
+      val dayOfWeek = date.getDayOfWeek
+      if (dayOfWeek == DayOfWeek.SATURDAY) date.minusDays(1)
+      else if (dayOfWeek == DayOfWeek.SUNDAY) date.minusDays(2)
+      else date
+    }
+
+    val target = LocalDate.parse(targetYYYYMMDD, dateFormatter)
+    val adjustedTarget = target.plusDays(offset)
+    val validDate = adjustToValidDate(adjustedTarget)
+
+    validDate.format(dateFormatter)
   }
-
-  val target = LocalDate.parse(targetYYYYMMDD, dateFormatter)
-  val adjustedTarget = target.plusDays(offset)
-  val validDate = adjustToValidDate(adjustedTarget)
-
-  validDate.format(dateFormatter)
-}
 
   //2024-11-19 16:10:49
   def getCurrentTimestamp(): String = {

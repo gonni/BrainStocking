@@ -57,3 +57,22 @@ create table STOCK_END_PRICE_ANALYZE_RESULT (
 	MEMO varchar(256),
 	primary key (TARGET_DT, ITEM_CODE)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ;
+
+--
+create table STOCK_END_PRICE_ANALYZE_RESULT (
+	TARGET_DT varchar(8) not null,
+	ITEM_CODE varchar(12) not null,
+	MATCH_SCORE float not null,
+	BASE_PRICE int,
+	NEXT_DAY_HIGH5M int,
+	AFTER_DAY_HIGH5D int,
+	UPD_DT timestamp,
+	MEMO varchar(256),
+	primary key (TARGET_DT, ITEM_CODE)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ;
+
+select * from STOCK_END_PRICE_ANALYZE_RESULT ;
+
+ALTER TABLE STOCK_END_PRICE_ANALYZE_RESULT
+ADD COLUMN BASE_PRICE int NOT NULL
+AFTER MATCH_SCORE;
