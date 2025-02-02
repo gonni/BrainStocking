@@ -13,6 +13,15 @@ import zio.ZIOAppDefault
 import zio.http.*
 import zio.http.Middleware.basicAuth
 import java.net.URI
+import x.yg.crawl.api.StockController
+import scala.meta.internal.javacp.BaseType.S
+import x.yg.analyser.DayVaildator
+import x.yg.crawl.core.StockCrawlerService
+import scalaz.Tags.Min
+import x.yg.crawl.core.MinStockCrawler
+import javax.xml.crypto.Data
+import zio.http.netty.NettyConfig
+import zio.http.netty.client.NettyClientDriver
 
 object Main extends ZIOAppDefault { 
   
@@ -21,18 +30,32 @@ object Main extends ZIOAppDefault {
       controller.routes
   }
 
+  val crawlApps = ZIO.serviceWith[StockController] {
+    controller => 
+      controller.routes
+  }
+
   val program = for {
     app <- apps
-    _ <- Server.serve(app @@ Middleware.debug)
+    crawlApps <- crawlApps
+    _ <- Server.serve((app ++ crawlApps) @@ Middleware.debug)
   } yield ()
 
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
     program.provide(
       Server.defaultWithPort(8080),
       ServiceController.live,
+      StockController.live,
       StockRepo.live,
       ScheduleRepo.live,
       CrawlStatusRepo.live,
+      StockCrawlerService.live,
+      MinStockCrawler.live,
+      DataDownloader.live,
+      Client.customized,
+      NettyClientDriver.live,
+      ZLayer.succeed(NettyConfig.default),
+      DnsResolver.default,
       Quill.Mysql.fromNamingStrategy(SnakeCase),
       Quill.DataSource.fromPrefix("StockMysqlAppConfig")
     )
