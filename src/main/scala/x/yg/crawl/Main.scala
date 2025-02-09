@@ -22,6 +22,8 @@ import x.yg.crawl.core.MinStockCrawler
 import javax.xml.crypto.Data
 import zio.http.netty.NettyConfig
 import zio.http.netty.client.NettyClientDriver
+import x.yg.crawl.data.EndPriceResultRepo
+import x.yg.analyser.EndPriceAnalyzer
 
 object Main extends ZIOAppDefault { 
   
@@ -43,6 +45,9 @@ object Main extends ZIOAppDefault {
 
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
     program.provide(
+      DayVaildator.live,
+      EndPriceResultRepo.live,
+      EndPriceAnalyzer.live,
       Server.defaultWithPort(8080),
       ServiceController.live,
       StockController.live,

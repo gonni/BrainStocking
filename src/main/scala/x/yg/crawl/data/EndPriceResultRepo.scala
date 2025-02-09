@@ -25,6 +25,7 @@ case class EndPriceResult(
 
 trait EndPriceResultRepo {
   def getEndPriceReuslt(itemCode: String, targetDt: String): ZIO[Any, Throwable, Option[EndPriceResult]]
+  def getNonCheck10mResult(): ZIO[Any, Throwable, List[EndPriceResult]]
   def upsertEndPriceResult(endPriceResult: EndPriceResult): ZIO[Any, Throwable, Long]
   def insertEndPriceResult(endPriceResult: EndPriceResult): ZIO[Any, Throwable, Long]
   def updateNextDayHigh5m(itemCode: String, targetDt: String, nextDayHigh5m: Int): ZIO[Any, Throwable, Long]
@@ -33,8 +34,14 @@ trait EndPriceResultRepo {
 
 class EndPriceResultRepoImpl (quill: Quill.Mysql[SnakeCase]) extends EndPriceResultRepo {
   import quill._
-
   private inline def qryEndPriceResultTable = quote(querySchema[EndPriceResult](entity = "STOCK_END_PRICE_ANALYZE_RESULT"))
+
+  override def getNonCheck10mResult(): ZIO[Any, Throwable, List[EndPriceResult]] = 
+    run(
+      qryEndPriceResultTable
+        .filter(_.nextDayHigh5m == 0)
+        // .filter(_.targetDt >= lift("20250201"))
+    )
 
   override def getEndPriceReuslt(itemCode: String, targetDt: String): ZIO[Any, Throwable, Option[EndPriceResult]] = 
     run(
@@ -93,7 +100,8 @@ class EndPriceResultRepoImpl (quill: Quill.Mysql[SnakeCase]) extends EndPriceRes
       qryEndPriceResultTable
         .filter(_.itemCode == lift(itemCode))
         .filter(_.targetDt == lift(targetDt))
-        .update(_.nextDayHigh5m -> lift(nextDayHigh5m))
+        .update(_.nextDayHigh5m -> lift(nextDayHigh5m), 
+        _.updDt -> lift(new Timestamp(java.lang.System.currentTimeMillis())))
     )
 
   override def updateAfterDayHigh5d(itemCode: String, targetDt: String, nextDayHigh5d: Int): ZIO[Any, Throwable, Long] = 
@@ -101,7 +109,8 @@ class EndPriceResultRepoImpl (quill: Quill.Mysql[SnakeCase]) extends EndPriceRes
       qryEndPriceResultTable
         .filter(_.itemCode == lift(itemCode))
         .filter(_.targetDt == lift(targetDt))
-        .update(_.afterDayHigh5d -> lift(nextDayHigh5d))
+        .update(_.afterDayHigh5d -> lift(nextDayHigh5d), 
+        _.updDt -> lift(new Timestamp(java.lang.System.currentTimeMillis())))
     )
 }
 

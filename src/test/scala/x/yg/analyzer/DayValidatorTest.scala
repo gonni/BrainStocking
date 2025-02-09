@@ -11,7 +11,7 @@ object DayValidatorTest extends ZIOAppDefault {
   val app = for {
     _ <- Console.printLine("Start ZIO Application ..")
     svc <- ZIO.service[DayVaildator]
-    _ <- svc.validateNextDayHighIn5min("089030", "20250123")
+    _ <- svc.validateNextDayHighIn10min("089030", "20250123")
   } yield ()
 
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = //Console.printLine("Hello119")

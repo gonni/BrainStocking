@@ -1,7 +1,6 @@
-package x.yg.analyser
+package x.yg.analyzer
 
 import zio._
-import x.yg.analyser.AnalyzeScheduler
 import x.yg.crawl.data.CrawlStatusRepo
 import x.yg.crawl.utils.DataUtil
 import x.yg.crawl.data.StockRepo
@@ -10,10 +9,11 @@ import io.getquill.jdbczio.Quill
 import x.yg.crawl.data.EndPriceResultRepo
 import org.scalafmt.internal.Policy.End
 import x.yg.crawl.data.EndPriceResult
+import x.yg.analyser.EndPriceAnalyzer
 
-object AnalyzeScheduler extends ZIOAppDefault {
+object EndPriceAnalyzerMain extends ZIOAppDefault {
 
-  def analyzeToday(targetDt: String = DataUtil.getYYYYMMDD(0)) = for {
+  def analyzeToday(targetDt: String = DataUtil.getYYYYMMDD(0)): ZIO[CrawlStatusRepo & EndPriceResultRepo & EndPriceAnalyzer & StockRepo, Throwable, Int] = for {
     crawlStatus <- ZIO.service[CrawlStatusRepo]
     endPriceResult <- ZIO.service[EndPriceResultRepo]
     analyzer <- ZIO.service[EndPriceAnalyzer]
@@ -35,7 +35,7 @@ object AnalyzeScheduler extends ZIOAppDefault {
   } yield cntValid // targetItmCodes.zip(res)
   
   override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-    analyzeToday("20250122") //DataUtil.getYYYYMMDD(-5))
+    analyzeToday("20250131") //DataUtil.getYYYYMMDD(-5))
     .provide(
       CrawlStatusRepo.live,
       EndPriceResultRepo.live,
