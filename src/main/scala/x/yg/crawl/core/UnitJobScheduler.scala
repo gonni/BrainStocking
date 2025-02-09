@@ -26,6 +26,7 @@ class CrawlJobScheduler(
 	crawler: MinStockCrawler,
 	crawlStatus: CrawlStatusRepo) extends UnitJobScheduler(queueRef) {
 
+	//TODO need to changed logic to check time check 09:00 ~ 15:30
 	override def unitProduce: ZIO[Any, Nothing, List[String]] = (for {
 		_ <- ZIO.when(DataUtil.getCurrentTimestamp() != DataUtil.stockTimestamp(0))(
 			ZIO.log("Out of stockTime") *> ZIO.fail(new Exception("---> Out of stock time of Today")))
