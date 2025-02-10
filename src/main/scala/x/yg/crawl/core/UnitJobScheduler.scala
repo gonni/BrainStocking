@@ -20,46 +20,6 @@ trait JobProducer[T] {
   def unitProduce: ZIO[Any, Nothing, List[T]]
 }
 
-class CrawlJobScheduler(
-	queueRef: Ref[List[Queue[String]]], 
-	stockRepo: StockRepo, 
-	crawler: MinStockCrawler,
-	crawlStatus: CrawlStatusRepo) extends UnitJobScheduler(queueRef) {
-
-	//TODO need to changed logic to check time check 09:00 ~ 15:30
-	override def unitProduce: ZIO[Any, Nothing, List[String]] = (for {
-		_ <- ZIO.when(DataUtil.getCurrentTimestamp() != DataUtil.stockTimestamp(0))(
-			ZIO.log("Out of stockTime") *> ZIO.fail(new Exception("---> Out of stock time of Today")))
-		queue <- queueRef.get
-		cntEndItemCodes <- queue.lastOption match {
-			case Some(q) => q.size
-			case None => ZIO.succeed(0)
-		}	
-		expiredItemCodes <- crawlStatus.getExpiredItemCode(10 * 60 * 1000 - cntEndItemCodes * 1000)
-		_ <- ZIO.foreachPar(expiredItemCodes){itemCode => crawlStatus.syncCrawlStatus(itemCode, "PEND")}
-		_ <- ZIO.log("Create target itemCodes : " + expiredItemCodes)
-	} yield expiredItemCodes)
-	.catchAll(e => ZIO.log(e.getMessage()) *> ZIO.succeed(List.empty[String]))
-
-	override def processJob(queue: Queue[String], workerId: Int = -1): ZIO[Any, Nothing, Unit] = 
-		(for {
-			itemCode <- queue.take
-			cd <- crawler.crawl(itemCode)
-			res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
-			_ <- crawlStatus.syncCrawlStatus(itemCode, "SUSP")
-			_ <- ZIO.foreach(cd){r => Console.printLine(r.toString())}
-			_ <- Console.printLine(s"Inserted data ${cd.size} for $itemCode by worker #$workerId").ignore	// log
-		} yield ()).repeat(Schedule.spaced(1.seconds))
-		.provide(
-			Client.customized,
-			NettyClientDriver.live,
-			ZLayer.succeed(NettyConfig.default),
-			DnsResolver.default,
-			DataDownloader.live,
-		)
-		.unit.catchAll(e => ZIO.log(e.getMessage()).ignore)
-}
-
 
 abstract class UnitJobScheduler (
 	queueRef: Ref[List[Queue[String]]], 
@@ -112,32 +72,48 @@ abstract class UnitJobScheduler (
 	}	
 }
 
-object Main1 extends ZIOAppDefault {
-	
-	val app = for {
-		queueRef <- Ref.make(List.empty[Queue[String]])
-		stockRepo <- ZIO.service[StockRepo]
-		crawler <- ZIO.service[MinStockCrawler]
-		crawlStatus <- ZIO.service[CrawlStatusRepo]
-		scheduler <- CrawlJobScheduler(
-			queueRef, 
-			stockRepo,
-			crawler,
-			crawlStatus
-		).startProduce()
-	} yield ()
-	
-	override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
-		app.provide(
-			// Client.customized,
-			// NettyClientDriver.live,
-			// ZLayer.succeed(NettyConfig.default),
-			// DnsResolver.default,
+
+class CrawlJobScheduler(
+	queueRef: Ref[List[Queue[String]]], 
+	stockRepo: StockRepo, 
+	crawler: MinStockCrawler,
+	crawlStatus: CrawlStatusRepo) extends UnitJobScheduler(queueRef) {
+
+	//TODO need to changed logic to check time check 09:00 ~ 15:30
+	override def unitProduce: ZIO[Any, Nothing, List[String]] = (for {
+		_ <- ZIO.when(DataUtil.getCurrentTimestamp() != DataUtil.stockTimestamp(0))(
+			ZIO.log("Out of stockTime") *> ZIO.fail(new Exception("---> Out of stock time of Today")))
+		queue <- queueRef.get
+		cntEndItemCodes <- queue.lastOption match {
+			case Some(q) => q.size
+			case None => ZIO.succeed(0)
+		}	
+		expiredItemCodes <- crawlStatus.getExpiredItemCode(10 * 60 * 1000 - cntEndItemCodes * 1000)
+		_ <- ZIO.foreachPar(expiredItemCodes){itemCode => crawlStatus.syncCrawlStatus(itemCode, "PEND")}
+		_ <- ZIO.log("Create target itemCodes : " + expiredItemCodes)
+	} yield expiredItemCodes)
+	.catchAll(e => ZIO.log(e.getMessage()) *> ZIO.succeed(List.empty[String]))
+
+	private def isStockTime(): ZIO[Any, Throwable, Boolean] = {
+		// ZIO.when()
+		ZIO.succeed(true)
+	}
+
+	override def processJob(queue: Queue[String], workerId: Int = -1): ZIO[Any, Nothing, Unit] = 
+		(for {
+			itemCode <- queue.take
+			cd <- crawler.crawl(itemCode)
+			res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
+			_ <- crawlStatus.syncCrawlStatus(itemCode, "SUSP")
+			_ <- ZIO.foreach(cd){r => Console.printLine(r.toString())}
+			_ <- Console.printLine(s"Inserted data ${cd.size} for $itemCode by worker #$workerId").ignore	// log
+		} yield ()).repeat(Schedule.spaced(1.seconds))
+		.provide(
+			Client.customized,
+			NettyClientDriver.live,
+			ZLayer.succeed(NettyConfig.default),
+			DnsResolver.default,
 			DataDownloader.live,
-			MinStockCrawler.live,
-			CrawlStatusRepo.live,
-			StockRepo.live,
-			Quill.Mysql.fromNamingStrategy(SnakeCase),
-			Quill.DataSource.fromPrefix("StockMysqlAppConfig")
-		).exitCode	
+		)
+		.unit.catchAll(e => ZIO.log(e.getMessage()).ignore)
 }
