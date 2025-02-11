@@ -14,6 +14,7 @@ import zio.http.netty.client.NettyClientDriver
 import java.util.concurrent.TimeUnit
 import x.yg.crawl.data.CrawlStatusRepo
 import x.yg.crawl.utils.DataUtil
+import java.time.LocalTime
 
 
 trait JobProducer[T] {
@@ -82,7 +83,9 @@ class CrawlJobScheduler(
 	//TODO need to changed logic to check time check 09:00 ~ 15:30
 	override def unitProduce: ZIO[Any, Nothing, List[String]] = (for {
 		_ <- ZIO.when(DataUtil.getCurrentTimestamp() != DataUtil.stockTimestamp(0))(
-			ZIO.log("Out of stockTime") *> ZIO.fail(new Exception("---> Out of stock time of Today")))
+			ZIO.log("Out of stockDay") *> ZIO.fail(new Exception("---> Out of stock time of Today")))
+		_ <- ZIO.whenZIO(!isStockTime())(
+			ZIO.log("Out of stockTime range") *> ZIO.fail(new Exception("---> Out of stock time")))
 		queue <- queueRef.get
 		cntEndItemCodes <- queue.lastOption match {
 			case Some(q) => q.size
@@ -95,8 +98,12 @@ class CrawlJobScheduler(
 	.catchAll(e => ZIO.log(e.getMessage()) *> ZIO.succeed(List.empty[String]))
 
 	private def isStockTime(): ZIO[Any, Throwable, Boolean] = {
-		// ZIO.when()
-		ZIO.succeed(true)
+		ZIO.succeed {
+      val now = LocalTime.now()
+      val start = LocalTime.of(9, 0)
+      val end = LocalTime.of(15, 30)
+      !now.isBefore(start) && !now.isAfter(end)
+    }
 	}
 
 	override def processJob(queue: Queue[String], workerId: Int = -1): ZIO[Any, Nothing, Unit] = 
