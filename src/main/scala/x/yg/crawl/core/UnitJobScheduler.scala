@@ -13,8 +13,8 @@ import zio.http.netty.client.NettyClientDriver
 
 import java.util.concurrent.TimeUnit
 import x.yg.crawl.data.CrawlStatusRepo
-import x.yg.crawl.utils.DataUtil
 import java.time.LocalTime
+import x.yg.crawl.utils.DataUtil
 
 
 trait JobProducer[T] {

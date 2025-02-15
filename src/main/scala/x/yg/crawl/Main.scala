@@ -24,6 +24,7 @@ import zio.http.netty.NettyConfig
 import zio.http.netty.client.NettyClientDriver
 import x.yg.crawl.data.EndPriceResultRepo
 import x.yg.analyser.EndPriceAnalyzer
+import x.yg.crawl.core.CrawlJobScheduler
 
 object Main extends ZIOAppDefault { 
   
@@ -37,7 +38,22 @@ object Main extends ZIOAppDefault {
       controller.routes
   }
 
+  val realtimeCrawl = for {
+		queueRef <- Ref.make(List.empty[Queue[String]])
+		stockRepo <- ZIO.service[StockRepo]
+		crawler <- ZIO.service[MinStockCrawler]
+		crawlStatus <- ZIO.service[CrawlStatusRepo]
+		scheduler <- CrawlJobScheduler(
+			queueRef, 
+			stockRepo,
+			crawler,
+			crawlStatus
+		).startProduce()
+	} yield ()
+
   val program = for {
+    _ <- realtimeCrawl.forkDaemon
+    _ <- ZIO.log("realtime crawl started ...")
     app <- apps
     crawlApps <- crawlApps
     _ <- Server.serve((app ++ crawlApps) @@ Middleware.debug)

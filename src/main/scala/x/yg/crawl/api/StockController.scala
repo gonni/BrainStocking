@@ -16,6 +16,8 @@ import x.yg.analyser.EndPriceAnalyzer
 import x.yg.crawl.data.EndPriceResult
 import io.getquill.SnakeCase
 import io.getquill.jdbczio.Quill
+import x.yg.crawl.core.MinStockCrawler
+import x.yg.crawl.core.CrawlJobScheduler
 
 case class StockController private(
     stockRepo: StockRepo, 
@@ -24,9 +26,20 @@ case class StockController private(
     stockCrawlerService: StockCrawlerService,
     endPriceResultRepo: EndPriceResultRepo,
     dayVaildator: DayVaildator,
-    endPriceAnalyzer: EndPriceAnalyzer
+    endPriceAnalyzer: EndPriceAnalyzer,
+    minStockCrawler: MinStockCrawler
 ) {
-  def routes: Routes[StockRepo with ScheduleRepo with CrawlStatusRepo with StockCrawlerService with EndPriceResultRepo with DayVaildator with EndPriceAnalyzer, Response] = Routes(
+  def routes: Routes[StockRepo with ScheduleRepo with CrawlStatusRepo with StockCrawlerService with EndPriceResultRepo 
+    with DayVaildator with EndPriceAnalyzer with MinStockCrawler, Response] = Routes(
+    
+    //  Method.GET / "stock" / "rtcrawl" / "start" -> handler { 
+    //   for {
+    //     _ <- ZIO.log("start realtime crawl")
+    //     queueRef <- Ref.make(List.empty[Queue[String]])
+    //     _ <- CrawlJobScheduler(queueRef, stockRepo, minStockCrawler, crawlStatusRepo).startProduce().forkDaemon
+    //     res <- ZIO.succeed(Response.text("Successfully started realtime crawler .."))
+    //   } yield res
+    // },
     // temporary
     Method.GET / "stock" / "crawl" / string("itemCode") / string("targetDt") -> handler {
       (itemCode: String, targetDt: String, _: Request) =>
@@ -58,6 +71,12 @@ case class StockController private(
       }
     },
     
+    Method.GET / "stock" / "getClosingPriceTarget" / "all" -> handler {
+      URL.decode("/stock/getClosingPriceTarget/all/" + DataUtil.getYYYYMMDD()) match {
+        case Left(e) => Response.text(e.getMessage())
+        case Right(value) => Response.redirect(value)
+      }
+    },
     // run on 15:10
     Method.GET / "stock" / "getClosingPriceTarget" / "all" / string("targetDt") -> handler { (targetDt: String, _: Request) =>
       (for{
@@ -116,7 +135,7 @@ case class StockController private(
 }
 
 object StockController {
-  val live: ZLayer[StockRepo with ScheduleRepo with CrawlStatusRepo with StockCrawlerService with EndPriceResultRepo with DayVaildator with EndPriceAnalyzer, 
-    Nothing, StockController] =
+  val live: ZLayer[StockRepo with ScheduleRepo with CrawlStatusRepo with StockCrawlerService with EndPriceResultRepo 
+    with DayVaildator with EndPriceAnalyzer with MinStockCrawler, Nothing, StockController] =
     ZLayer.fromFunction(StockController.apply)
 }
