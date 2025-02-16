@@ -5,11 +5,12 @@
 - 스터디 및 실험적 구현을 위해 Scala, ZIO 기반으로 개발되었습니다.
 
 ### 주요 기능
-- 특정 조건을 만족하는 주식 종목 필터링
-- 선정된 종목의 수익률 분석
+- 종목 가격, 거래량의Slow Crawling 적용 (대량 트래픽으로 인한 차단 방지)
+- 종가매매 종목 추출을 위한 추출 알고리즘 적용 (매일 15:10 금일자 대상종목 추출)
+- 종목 추출후 다음날 적중 여부 검증, 추출후 5일간 변화도 분석
 
 ## 설치 및 실행 방법
-- 개발중(2025.2월중 Demo 예정)
+- TBD
 
 ### Demo
-- [https://heyes.live](https://www.heyes.live/)
+- [https://www.heyes.live/stock/closingPriceAnalysis](https://www.heyes.live/stock/closingPriceAnalysis)
