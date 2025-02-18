@@ -5,7 +5,27 @@
     </encoder>
   </appender>
 
+  <!-- 파일 로그 설정 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 로그 파일 이름 패턴 (YYYY-MM-DD로 파일 생성) -->
+            <fileNamePattern>logs/app-%d{yyyy-MM-dd}.log</fileNamePattern>
+
+            <!-- 로그 파일을 7일간 보관 -->
+            <maxHistory>7</maxHistory>
+
+            <!-- 개별 파일 최대 크기 (선택적) -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%level] [%logger{36}] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
   <root level="debug">
     <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
   </root>
+
 </configuration>

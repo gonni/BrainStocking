@@ -28,7 +28,8 @@ lazy val hello = (project in file("."))
     )
   )
 
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.11"
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.11"
+libraryDependencies += "org.slf4j" % "slf4j-api" % "2.0.7"
 libraryDependencies += "net.ruippeixotog" %% "scala-scraper" % "3.1.1"
 libraryDependencies += "dev.zio" %% "zio-macros" % "2.1.6"
 libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % "2.3.0"
