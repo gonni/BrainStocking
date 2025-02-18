@@ -111,7 +111,7 @@ class CrawlJobScheduler(
 			itemCode <- queue.take
 			cd <- crawler.crawl(itemCode)
 			res <- stockRepo.insertStockMinVolumeSerialBulk(cd)
-			_ <- crawlStatus.syncCrawlStatus(itemCode, "SUSP")
+			_ <- crawlStatus.syncCrawlStatus(itemCode, "ACTV")
 			_ <- ZIO.foreach(cd){r => Console.printLine(r.toString())}
 			_ <- Console.printLine(s"Inserted data ${cd.size} for $itemCode by worker #$workerId").ignore	// log
 		} yield ()).repeat(Schedule.spaced(1.seconds))

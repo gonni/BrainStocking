@@ -82,6 +82,7 @@ case class StockController private(
       (for{
         _ <- ZIO.log(s"detected getClosingPriceTarget $targetDt fired")
         targetItmCodes <- crawlStatusRepo.getTargetToCrawl("ACTV")
+        _ <- ZIO.log(s"size of targetSeeds : ${targetItmCodes.length}")
         cntValid <- ZIO.foldLeft(targetItmCodes)(0){(acc, itemCode) => 
           for {
             res <- endPriceAnalyzer.analyze(itemCode, targetDt)
@@ -113,10 +114,11 @@ case class StockController private(
     Method.GET / "stock" / "checkNextday10m" / "all" / string("targetDt") -> handler {(targetDt: String, _: Request) =>
       (for {
         targets <- endPriceResultRepo.getNonCheck10mResult()
+        _ <- ZIO.log(s"size of targetSeeds : ${targets.length}")
         res <- ZIO.foreach(targets)(epr => 
           for {
             _ <- Console.printLine(s"target : ${epr.itemCode} ${epr.targetDt}")
-            res1 <- dayVaildator.vaildateNextDay10minFromToday(epr.itemCode, epr.targetDt, "20250203").mapBoth(
+            res1 <- dayVaildator.vaildateNextDay10minFromToday(epr.itemCode, epr.targetDt, targetDt).mapBoth(
               e => Response.text(e.toString),
               _ => Response.text("Success")
             )

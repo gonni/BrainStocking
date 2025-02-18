@@ -13,7 +13,7 @@ trait EndPriceAnalyzer {
 
 class EndPriceAnalyzerImpl extends EndPriceAnalyzer {
   // 0.80 innerErrorPer is valid
-  def analyzeUpstream(data: List[StockMinVolumeTable],  allowedError: Double = 0.25, innerErrorPer: Double = 0.40) = {
+  def analyzeUpstream(data: List[StockMinVolumeTable],  allowedError: Double = 0.20, innerErrorPer: Double = 0.60) = {
         
     val streamedData = ZStream.fromIterable(data).filter(r => {
         val tokens = r.tsCode.split("_")
