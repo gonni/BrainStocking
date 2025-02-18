@@ -25,9 +25,12 @@ import zio.http.netty.client.NettyClientDriver
 import x.yg.crawl.data.EndPriceResultRepo
 import x.yg.analyser.EndPriceAnalyzer
 import x.yg.crawl.core.CrawlJobScheduler
+import zio.logging.backend.SLF4J
 
 object Main extends ZIOAppDefault { 
-  
+  override val bootstrap: ZLayer[Any, Nothing, Unit] =
+    Runtime.removeDefaultLoggers >>> SLF4J.slf4j
+
   val apps = ZIO.serviceWith[ServiceController] {
     controller => 
       controller.routes
@@ -59,7 +62,8 @@ object Main extends ZIOAppDefault {
     _ <- Server.serve((app ++ crawlApps) @@ Middleware.debug)
   } yield ()
 
-  override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = 
+  override def run: ZIO[Any & (ZIOAppArgs & Scope), Any, Any] = {
+    Runtime.removeDefaultLoggers
     program.provide(
       DayVaildator.live,
       EndPriceResultRepo.live,
@@ -80,4 +84,5 @@ object Main extends ZIOAppDefault {
       Quill.Mysql.fromNamingStrategy(SnakeCase),
       Quill.DataSource.fromPrefix("StockMysqlAppConfig")
     )
+  }
 }
