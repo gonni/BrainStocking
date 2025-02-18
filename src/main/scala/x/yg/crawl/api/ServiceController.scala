@@ -11,8 +11,17 @@ import x.yg.crawl.data.CrawlStatusRepo
 
 case class ServiceController private(stockRepo: StockRepo, scheduleRepo: ScheduleRepo, crawlStatusRepo: CrawlStatusRepo) {
   def routes: Routes[Any, Response] = Routes(
-    Method.GET / "stock" / "daily" / "all" -> handler {
-      Response.text("Hello World")
+    Method.GET / "stock" / "hello" -> handler {
+      for {
+        _ <- ZIO.log("Hello log") 
+        _ <- ZIO.logInfo("Hello logInfo") 
+        _ <- ZIO.logWarning("Hello logWarn") 
+        _ <- ZIO.logError("Hello logError")
+      } yield Response.text("Hello World")
+      // ZIO.log("Hello log") *> ZIO.logInfo("Hello logInfo") 
+      // *> ZIO.logWarning("Hello logWarn") *> ZIO.logError("Hello logError")
+
+      // Response.text("Hello World")
     },
     Method.GET / "stock" / "conf" / "sample" -> handler {(req: Request) =>
       ZIO.log("detected fire") *> scheduleRepo.syncStockItemInfo(StockItemInfo("000000", "Sample")).mapBoth(
