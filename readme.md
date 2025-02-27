@@ -13,4 +13,5 @@
 - TBD
 
 ### Demo
+- [http://heyes.live:443/stock/closingPriceAnalysis](http://heyes.live:443/stock/closingPriceAnalysis)
 - [https://www.heyes.live/stock/closingPriceAnalysis](https://www.heyes.live/stock/closingPriceAnalysis)
